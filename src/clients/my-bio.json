@@ -1,0 +1,30 @@
+{
+  "client_id": "my-bio",
+  "profile": {
+    "name": "Your Name",
+    "name_class": "",
+    "title": "Your Title",
+    "bio": "Your bio description here",
+    "avatar": "https://i.pravatar.cc/300",
+    "verified": false,
+    "stats": []
+  },
+  "background": {
+    "type": "gradient",
+    "gradient_class": "bg-gradient-sunset"
+  },
+  "theme": {
+    "colors": {
+      "primary": "#0066FF",
+      "secondary": "#9B00FF"
+    }
+  },
+  "layout": {
+    "type": "centered"
+  },
+  "footer": {
+    "enabled": false,
+    "copyright_text": "© 2025 My Bio Page"
+  },
+  "content_blocks": []
+}

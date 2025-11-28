@@ -1,0 +1,1636 @@
+@import "tailwindcss";
+
+/* ============================================
+   ULTRA DETAILED COLOR PALETTE
+   ============================================ */
+
+@theme {
+    /* ==========================================
+     PRIMARY BRAND COLORS (10 Shades Each)
+     ========================================== */
+
+    /* Primary Blue Scale */
+    --color-primary-50: #E6F0FF;
+    --color-primary-100: #CCE0FF;
+    --color-primary-200: #99C2FF;
+    --color-primary-300: #66A3FF;
+    --color-primary-400: #3385FF;
+    --color-primary-500: #0066FF;
+    --color-primary-600: #0052CC;
+    --color-primary-700: #003D99;
+    --color-primary-800: #002966;
+    --color-primary-900: #001433;
+    --color-primary-950: #000A1A;
+
+    /* Secondary Purple Scale */
+    --color-secondary-50: #F5E6FF;
+    --color-secondary-100: #EBCCFF;
+    --color-secondary-200: #D799FF;
+    --color-secondary-300: #C366FF;
+    --color-secondary-400: #AF33FF;
+    --color-secondary-500: #9B00FF;
+    --color-secondary-600: #7C00CC;
+    --color-secondary-700: #5D0099;
+    --color-secondary-800: #3E0066;
+    --color-secondary-900: #1F0033;
+    --color-secondary-950: #0F0019;
+
+    /* Accent Pink Scale */
+    --color-accent-50: #FFF0F7;
+    --color-accent-100: #FFE0EF;
+    --color-accent-200: #FFC2DE;
+    --color-accent-300: #FFA3CE;
+    --color-accent-400: #FF85BD;
+    --color-accent-500: #FF66AD;
+    --color-accent-600: #CC528A;
+    --color-accent-700: #993D68;
+    --color-accent-800: #662945;
+    --color-accent-900: #331423;
+    --color-accent-950: #1A0A11;
+
+    /* ==========================================
+     SEMANTIC COLORS
+     ========================================== */
+
+    /* Success Green */
+    --color-success-50: #ECFDF5;
+    --color-success-100: #D1FAE5;
+    --color-success-200: #A7F3D0;
+    --color-success-300: #6EE7B7;
+    --color-success-400: #34D399;
+    --color-success-500: #10B981;
+    --color-success-600: #059669;
+    --color-success-700: #047857;
+    --color-success-800: #065F46;
+    --color-success-900: #064E3B;
+    --color-success-950: #022C22;
+
+    /* Warning Amber */
+    --color-warning-50: #FFFBEB;
+    --color-warning-100: #FEF3C7;
+    --color-warning-200: #FDE68A;
+    --color-warning-300: #FCD34D;
+    --color-warning-400: #FBBF24;
+    --color-warning-500: #F59E0B;
+    --color-warning-600: #D97706;
+    --color-warning-700: #B45309;
+    --color-warning-800: #92400E;
+    --color-warning-900: #78350F;
+    --color-warning-950: #451A03;
+
+    /* Error Red */
+    --color-error-50: #FEF2F2;
+    --color-error-100: #FEE2E2;
+    --color-error-200: #FECACA;
+    --color-error-300: #FCA5A5;
+    --color-error-400: #F87171;
+    --color-error-500: #EF4444;
+    --color-error-600: #DC2626;
+    --color-error-700: #B91C1C;
+    --color-error-800: #991B1B;
+    --color-error-900: #7F1D1D;
+    --color-error-950: #450A0A;
+
+    /* Info Cyan */
+    --color-info-50: #ECFEFF;
+    --color-info-100: #CFFAFE;
+    --color-info-200: #A5F3FC;
+    --color-info-300: #67E8F9;
+    --color-info-400: #22D3EE;
+    --color-info-500: #06B6D4;
+    --color-info-600: #0891B2;
+    --color-info-700: #0E7490;
+    --color-info-800: #155E75;
+    --color-info-900: #164E63;
+    --color-info-950: #083344;
+
+    /* ==========================================
+     BACKGROUND PATTERN VARIABLES
+     ========================================== */
+
+    /* Pattern Colors */
+    --pattern-color-1: #E5E7EB;
+    --pattern-color-2: #D1D5DB;
+    --pattern-color-3: #9CA3AF;
+    --pattern-opacity: 0.4;
+
+    /* Pattern Sizes */
+    --pattern-size-sm: 20px;
+    --pattern-size-md: 40px;
+    --pattern-size-lg: 60px;
+    --pattern-size-xl: 80px;
+}
+
+/* ============================================
+   CSS @PROPERTY FOR ANIMATED BORDERS
+   ============================================ */
+
+@property --border-angle {
+    inherits: false;
+    initial-value: 0deg;
+    syntax: '<angle>';
+}
+
+@property --gradient-angle {
+    inherits: false;
+    initial-value: 0deg;
+    syntax: '<angle>';
+}
+
+/* ============================================
+   KEYFRAME ANIMATIONS
+   ============================================ */
+
+@keyframes gradient-x {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes gradient-xy {
+
+    0%,
+    100% {
+        background-position: 0% 0%;
+    }
+
+    25% {
+        background-position: 100% 0%;
+    }
+
+    50% {
+        background-position: 100% 100%;
+    }
+
+    75% {
+        background-position: 0% 100%;
+    }
+}
+
+@keyframes gradient-shift {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+        background-size: 200% 200%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+        background-size: 300% 300%;
+    }
+}
+
+@keyframes border-rotate {
+    to {
+        --gradient-angle: 360deg;
+    }
+}
+
+@keyframes hue-rotate {
+    from {
+        filter: hue-rotate(0deg);
+    }
+
+    to {
+        filter: hue-rotate(360deg);
+    }
+}
+
+@keyframes pattern-move {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: var(--pattern-size-md) var(--pattern-size-md);
+    }
+}
+
+@keyframes pattern-pulse {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.6;
+        transform: scale(1.05);
+    }
+}
+
+@keyframes pattern-rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pattern-wave {
+
+    0%,
+    100% {
+        background-position: 0% 0%;
+    }
+
+    25% {
+        background-position: 100% 0%;
+    }
+
+    50% {
+        background-position: 100% 100%;
+    }
+
+    75% {
+        background-position: 0% 100%;
+    }
+}
+
+@keyframes pattern-slide-diagonal {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 100px 100px;
+    }
+}
+
+@keyframes pattern-zoom {
+
+    0%,
+    100% {
+        background-size: var(--pattern-size-md) var(--pattern-size-md);
+    }
+
+    50% {
+        background-size: calc(var(--pattern-size-md) * 1.5) calc(var(--pattern-size-md) * 1.5);
+    }
+}
+
+@keyframes pattern-color-shift {
+
+    0%,
+    100% {
+        filter: hue-rotate(0deg) brightness(1);
+    }
+
+    50% {
+        filter: hue-rotate(180deg) brightness(1.2);
+    }
+}
+
+/* ============================================
+   TEXT EFFECT ANIMATIONS
+   ============================================ */
+
+@keyframes holographic-gradient-move {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 200% 50%;
+    }
+}
+
+@keyframes vibrant-gradient-x {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes neon-flicker {
+
+    0%,
+    19.999%,
+    22%,
+    62.999%,
+    64%,
+    64.999%,
+    70%,
+    100% {
+        opacity: 1;
+    }
+
+    20%,
+    21.999%,
+    63%,
+    63.999%,
+    65%,
+    69.999% {
+        opacity: 0.4;
+    }
+}
+
+@keyframes neon-pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+}
+
+@keyframes liquid-shimmer {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes diamond-shine {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+@keyframes gold-shine {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+@keyframes cosmic-flow {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    33% {
+        background-position: 50% 100%;
+    }
+
+    66% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes starlight-twinkle {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+        filter: drop-shadow(0 0 5px #fff) drop-shadow(0 0 10px #e0e0ff) brightness(1);
+    }
+
+    50% {
+        background-position: 100% 50%;
+        filter: drop-shadow(0 0 8px #fff) drop-shadow(0 0 15px #e0e0ff) brightness(1.3);
+    }
+}
+
+@keyframes galaxy-swirl {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    25% {
+        background-position: 100% 0%;
+    }
+
+    50% {
+        background-position: 100% 100%;
+    }
+
+    75% {
+        background-position: 0% 100%;
+    }
+
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+@keyframes glitch-skew {
+    0% {
+        transform: skew(0deg);
+    }
+
+    10% {
+        transform: skew(-2deg);
+    }
+
+    20% {
+        transform: skew(2deg);
+    }
+
+    30% {
+        transform: skew(0deg);
+    }
+
+    100% {
+        transform: skew(0deg);
+    }
+}
+
+@keyframes glitch-anim-1 {
+    0% {
+        clip-path: inset(40% 0 61% 0);
+    }
+
+    20% {
+        clip-path: inset(92% 0 1% 0);
+    }
+
+    40% {
+        clip-path: inset(43% 0 1% 0);
+    }
+
+    60% {
+        clip-path: inset(25% 0 58% 0);
+    }
+
+    80% {
+        clip-path: inset(54% 0 7% 0);
+    }
+
+    100% {
+        clip-path: inset(58% 0 43% 0);
+    }
+}
+
+@keyframes glitch-anim-2 {
+    0% {
+        clip-path: inset(65% 0 15% 0);
+    }
+
+    20% {
+        clip-path: inset(47% 0 23% 0);
+    }
+
+    40% {
+        clip-path: inset(84% 0 11% 0);
+    }
+
+    60% {
+        clip-path: inset(38% 0 40% 0);
+    }
+
+    80% {
+        clip-path: inset(3% 0 92% 0);
+    }
+
+    100% {
+        clip-path: inset(53% 0 26% 0);
+    }
+}
+
+@keyframes rainbow-flow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 200% 50%;
+    }
+}
+
+@keyframes chromatic-aberration-1 {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(-3px);
+    }
+}
+
+@keyframes chromatic-aberration-2 {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(3px);
+    }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+@layer utilities {
+
+    /* ==========================================
+     ANIMATED GRADIENTS
+     ========================================== */
+
+    .gradient-animated-sunset {
+        background: linear-gradient(90deg,
+                #FF6B35,
+                #F7931E,
+                #FDC830,
+                #FFE259,
+                #FF6B35);
+        background-size: 200% 200%;
+        animation: gradient-x 10s ease infinite;
+    }
+
+    .gradient-animated-ocean {
+        background: linear-gradient(90deg,
+                #00D4FF,
+                #0099FF,
+                #0061FF,
+                #0033CC,
+                #00D4FF);
+        background-size: 300% 300%;
+        animation: gradient-x 12s ease infinite;
+    }
+
+    .gradient-animated-neon {
+        background: linear-gradient(90deg,
+                #FF00FF,
+                #9D00FF,
+                #4D00FF,
+                #00FFFF,
+                #FF00FF);
+        background-size: 400% 400%;
+        animation: gradient-x 6s ease infinite;
+    }
+
+    .gradient-animated-aurora {
+        background: linear-gradient(90deg,
+                #00FFA3,
+                #03E1FF,
+                #9D00FF,
+                #DC1FFF,
+                #00FFA3);
+        background-size: 300% 300%;
+        animation: gradient-x 15s ease infinite;
+    }
+
+    .gradient-animated-instagram {
+        background: linear-gradient(45deg,
+                #F58529,
+                #DD2A7B,
+                #8134AF,
+                #515BD4);
+        background-size: 400% 400%;
+        animation: gradient-xy 15s ease infinite;
+    }
+
+    .gradient-animated-holographic {
+        background: linear-gradient(124deg,
+                #FF00FF,
+                #FF00AA,
+                #00FFFF,
+                #00FF88,
+                #FFFF00);
+        background-size: 1800% 1800%;
+        animation: gradient-shift 18s ease infinite;
+    }
+
+    .gradient-animated-fire {
+        background: linear-gradient(90deg,
+                #FFE259,
+                #FFA751,
+                #FF6B4A,
+                #FF4E50,
+                #FFE259);
+        background-size: 200% 200%;
+        animation: gradient-x 8s ease infinite;
+    }
+
+    .gradient-animated-cosmic {
+        background: linear-gradient(90deg,
+                #5B247A,
+                #7B2D98,
+                #8E44AD,
+                #C39BD3,
+                #5B247A);
+        background-size: 250% 250%;
+        animation: gradient-x 14s ease infinite;
+    }
+
+    /* ==========================================
+     STATIC GRADIENTS
+     ========================================== */
+
+    .bg-gradient-sunset {
+        background: linear-gradient(to right, #FF6B35, #F7931E, #FDC830);
+    }
+
+    .bg-gradient-ocean {
+        background: linear-gradient(to right, #00D4FF, #0099FF, #0061FF);
+    }
+
+    .bg-gradient-purple-dream {
+        background: linear-gradient(to right, #A8EDEA, #B794F6, #8B5CF6);
+    }
+
+    .bg-gradient-neon {
+        background: linear-gradient(to right, #FF00FF, #9D00FF, #00FFFF);
+    }
+
+    .bg-gradient-fire {
+        background: linear-gradient(to right, #FFE259, #FFA751, #FF4E50);
+    }
+
+    .bg-gradient-instagram {
+        background: linear-gradient(45deg, #F58529, #DD2A7B, #8134AF, #515BD4);
+    }
+
+    .bg-gradient-aurora {
+        background: linear-gradient(to right, #00FFA3, #03E1FF, #9D00FF, #DC1FFF);
+    }
+
+    .bg-gradient-cosmic {
+        background: linear-gradient(to right, #5B247A, #7B2D98, #8E44AD, #C39BD3);
+    }
+
+    .bg-gradient-tropical {
+        background: linear-gradient(to right, #FFE66D, #FF6B6B, #FE5F75, #E84393);
+    }
+
+    .bg-gradient-mint {
+        background: linear-gradient(to right, #E0F7FA, #80DEEA, #4DD0E1, #26C6DA);
+    }
+
+    .bg-nebula {
+        background: linear-gradient(to right, #2b5876, #4e4376);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .bg-nebula::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+        animation: pattern-rotate 60s linear infinite;
+    }
+
+    /* Diagonal Gradients */
+    .bg-gradient-diagonal-sunset {
+        background: linear-gradient(45deg, #FF6B35, #FDC830);
+    }
+
+    .bg-gradient-diagonal-ocean {
+        background: linear-gradient(45deg, #00D4FF, #0033CC);
+    }
+
+    .bg-gradient-diagonal-neon {
+        background: linear-gradient(45deg, #FF00FF, #00FFFF);
+    }
+
+    /* Radial Gradients */
+    .bg-gradient-radial-sunset {
+        background: radial-gradient(circle, #FF6B35, #F7931E, #FDC830);
+    }
+
+    .bg-gradient-radial-ocean {
+        background: radial-gradient(circle, #00D4FF, #0099FF, #0061FF);
+    }
+
+    .bg-gradient-radial-purple {
+        background: radial-gradient(circle, #A8EDEA, #B794F6, #8B5CF6);
+    }
+
+    /* ==========================================
+     COMPOSITE BACKGROUNDS (Gradient + Pattern)
+     ========================================== */
+
+    .bg-composite-ocean-grid {
+        background-image:
+            linear-gradient(var(--pattern-color-2) 1px, transparent 1px),
+            linear-gradient(90deg, var(--pattern-color-2) 1px, transparent 1px),
+            linear-gradient(to right, #00D4FF, #0099FF, #0061FF);
+        background-size: var(--pattern-size-md) var(--pattern-size-md), var(--pattern-size-md) var(--pattern-size-md), 100% 100%;
+    }
+
+    .bg-composite-sunset-dots {
+        background-image:
+            radial-gradient(circle, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+            linear-gradient(to right, #FF6B35, #F7931E, #FDC830);
+        background-size: var(--pattern-size-md) var(--pattern-size-md), 100% 100%;
+    }
+
+    .bg-composite-neon-stripes {
+        background-image:
+            repeating-linear-gradient(45deg, transparent, transparent 15px, rgba(255, 255, 255, 0.1) 15px, rgba(255, 255, 255, 0.1) 30px),
+            linear-gradient(to right, #FF00FF, #9D00FF, #00FFFF);
+        background-size: 100% 100%, 100% 100%;
+    }
+
+    .bg-composite-aurora-dots {
+        background-image:
+            radial-gradient(circle, rgba(255, 255, 255, 0.2) 2px, transparent 2px),
+            linear-gradient(to right, #00FFA3, #03E1FF, #9D00FF, #DC1FFF);
+        background-size: var(--pattern-size-lg) var(--pattern-size-lg), 100% 100%;
+    }
+
+    .bg-composite-cosmic-grid {
+        background-image:
+            linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+            linear-gradient(to right, #5B247A, #7B2D98, #8E44AD, #C39BD3);
+        background-size: var(--pattern-size-lg) var(--pattern-size-lg), var(--pattern-size-lg) var(--pattern-size-lg), 100% 100%;
+    }
+
+    .bg-composite-fire-diagonals {
+        background-image:
+            repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255, 255, 255, 0.1) 10px, rgba(255, 255, 255, 0.1) 20px),
+            linear-gradient(to right, #FFE259, #FFA751, #FF4E50);
+        background-size: 100% 100%, 100% 100%;
+    }
+
+    .bg-composite-instagram-circles {
+        background-image:
+            radial-gradient(circle, rgba(255, 255, 255, 0.15) 15%, transparent 15%),
+            radial-gradient(circle, rgba(255, 255, 255, 0.15) 15%, transparent 15%),
+            linear-gradient(45deg, #F58529, #DD2A7B, #8134AF, #515BD4);
+        background-size: var(--pattern-size-lg) var(--pattern-size-lg), var(--pattern-size-lg) var(--pattern-size-lg), 100% 100%;
+        background-position: 0 0, calc(var(--pattern-size-lg) / 2) calc(var(--pattern-size-lg) / 2), 0 0;
+    }
+
+    .bg-composite-mint-waves {
+        background-image:
+            repeating-linear-gradient(0deg, transparent, transparent 20px, rgba(255, 255, 255, 0.1) 20px, rgba(255, 255, 255, 0.1) 40px),
+            linear-gradient(to right, #E0F7FA, #80DEEA, #4DD0E1, #26C6DA);
+        background-size: 100% 100%, 100% 100%;
+    }
+
+    /* Animated Composite Backgrounds */
+    .bg-composite-animated-ocean {
+        background-image:
+            linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+            linear-gradient(90deg, #00D4FF, #0099FF, #0061FF, #0033CC, #00D4FF);
+        background-size: var(--pattern-size-md) var(--pattern-size-md), var(--pattern-size-md) var(--pattern-size-md), 300% 300%;
+        animation: gradient-x 12s ease infinite;
+    }
+
+    .bg-composite-animated-neon {
+        background-image:
+            radial-gradient(circle, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+            linear-gradient(90deg, #FF00FF, #9D00FF, #4D00FF, #00FFFF, #FF00FF);
+        background-size: var(--pattern-size-md) var(--pattern-size-md), 400% 400%;
+        animation: gradient-x 6s ease infinite, pattern-move 30s linear infinite;
+    }
+
+    .bg-composite-animated-matrix {
+        background-image:
+            linear-gradient(0deg, transparent 24%, rgba(0, 255, 0, 0.2) 25%, rgba(0, 255, 0, 0.2) 26%, transparent 27%, transparent 74%, rgba(0, 255, 0, 0.2) 75%, rgba(0, 255, 0, 0.2) 76%, transparent 77%, transparent),
+            linear-gradient(90deg, transparent 24%, rgba(0, 255, 0, 0.2) 25%, rgba(0, 255, 0, 0.2) 26%, transparent 27%, transparent 74%, rgba(0, 255, 0, 0.2) 75%, rgba(0, 255, 0, 0.2) 76%, transparent 77%, transparent),
+            linear-gradient(to bottom, #001a00, #003300, #004d00);
+        background-size: var(--pattern-size-xl) var(--pattern-size-xl), var(--pattern-size-xl) var(--pattern-size-xl), 100% 100%;
+        animation: pattern-move 15s linear infinite;
+    }
+
+    /* ==========================================
+     MESH GRADIENTS
+     ========================================== */
+
+    .bg-mesh-sunset {
+        background:
+            radial-gradient(at 27% 37%, hsla(215, 98%, 61%, 0.3) 0px, transparent 50%),
+            radial-gradient(at 97% 21%, hsla(125, 98%, 72%, 0.3) 0px, transparent 50%),
+            radial-gradient(at 52% 99%, hsla(354, 98%, 61%, 0.3) 0px, transparent 50%),
+            radial-gradient(at 10% 29%, hsla(256, 96%, 67%, 0.3) 0px, transparent 50%),
+            radial-gradient(at 97% 96%, hsla(38, 60%, 74%, 0.3) 0px, transparent 50%),
+            radial-gradient(at 33% 50%, hsla(222, 67%, 73%, 0.3) 0px, transparent 50%),
+            radial-gradient(at 79% 53%, hsla(343, 68%, 79%, 0.3) 0px, transparent 50%),
+            linear-gradient(to right, #FF6B35, #F7931E);
+    }
+
+    .bg-mesh-ocean {
+        background:
+            radial-gradient(at 40% 20%, hsla(197, 100%, 54%, 0.4) 0px, transparent 50%),
+            radial-gradient(at 80% 0%, hsla(189, 100%, 56%, 0.4) 0px, transparent 50%),
+            radial-gradient(at 0% 50%, hsla(206, 100%, 50%, 0.4) 0px, transparent 50%),
+            radial-gradient(at 80% 50%, hsla(187, 100%, 42%, 0.4) 0px, transparent 50%),
+            radial-gradient(at 0% 100%, hsla(201, 100%, 63%, 0.4) 0px, transparent 50%),
+            radial-gradient(at 80% 100%, hsla(210, 100%, 37%, 0.4) 0px, transparent 50%),
+            linear-gradient(to bottom, #00D4FF, #0061FF);
+    }
+
+    .bg-mesh-cosmic {
+        background:
+            radial-gradient(at 30% 30%, hsla(271, 76%, 53%, 0.4) 0px, transparent 50%),
+            radial-gradient(at 70% 70%, hsla(271, 61%, 61%, 0.4) 0px, transparent 50%),
+            radial-gradient(at 50% 10%, hsla(261, 47%, 70%, 0.4) 0px, transparent 50%),
+            radial-gradient(at 90% 50%, hsla(271, 76%, 78%, 0.4) 0px, transparent 50%),
+            radial-gradient(at 10% 90%, hsla(261, 47%, 40%, 0.4) 0px, transparent 50%),
+            linear-gradient(135deg, #5B247A, #C39BD3);
+    }
+
+    /* ==========================================
+     SPECIAL EFFECT BACKGROUNDS
+     ========================================== */
+
+    .bg-spotlight {
+        background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+            linear-gradient(to bottom, #0a0a0a, #1a1a1a);
+    }
+
+    .bg-laser-grid {
+        background:
+            linear-gradient(rgba(0, 255, 255, 0.3) 2px, transparent 2px),
+            linear-gradient(90deg, rgba(255, 0, 255, 0.3) 2px, transparent 2px),
+            linear-gradient(to bottom, #000033, #000066);
+        background-size: 50px 50px, 50px 50px, 100% 100%;
+        perspective: 1000px;
+    }
+
+    .bg-nebula {
+        background:
+            radial-gradient(ellipse at top left, rgba(138, 43, 226, 0.3) 0%, transparent 40%),
+            radial-gradient(ellipse at top right, rgba(255, 20, 147, 0.3) 0%, transparent 40%),
+            radial-gradient(ellipse at bottom left, rgba(0, 191, 255, 0.3) 0%, transparent 40%),
+            radial-gradient(ellipse at bottom right, rgba(255, 105, 180, 0.3) 0%, transparent 40%),
+            linear-gradient(135deg, #0a0015, #1a0030, #0f001a);
+    }
+
+    /* ==========================================
+     GRADIENT TEXT
+     ========================================== */
+
+    .text-gradient-sunset {
+        background: linear-gradient(to right, #FF6B35, #FDC830);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+    }
+
+    .text-gradient-ocean {
+        background: linear-gradient(to right, #00D4FF, #0033CC);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+    }
+
+    .text-gradient-neon {
+        background: linear-gradient(to right, #FF00FF, #00FFFF);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+    }
+
+    .text-gradient-instagram {
+        background: linear-gradient(45deg, #F58529, #DD2A7B, #8134AF, #515BD4);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+    }
+
+    .text-gradient-aurora {
+        background: linear-gradient(to right, #00FFA3, #9D00FF);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+    }
+
+    /* Animated Gradient Text */
+    .text-gradient-animated {
+        background: linear-gradient(90deg,
+                #FF6B35,
+                #FF6B6B,
+                #8B5CF6,
+                #0099FF,
+                #FF6B35);
+        background-size: 300% 300%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        animation: gradient-x 8s ease infinite;
+    }
+
+    /* ==========================================
+     HOLOGRAPHIC TEXT EFFECTS
+     ========================================== */
+
+    /* Classic Holographic - Spectrum Shift */
+    .text-holographic-gradient-animated {
+        background: linear-gradient(90deg,
+                #ff00ff 0%,
+                #00ffff 25%,
+                #ffff00 50%,
+                #00ffff 75%,
+                #ff00ff 100%);
+        background-size: 200% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        animation: holographic-gradient-move 6s linear infinite;
+        filter: drop-shadow(0 2px 12px #00ffff99);
+    }
+
+    /* Ultra Holographic - More Colors */
+    .text-holographic-ultra {
+        background: linear-gradient(90deg,
+                #ff0080,
+                #ff0000,
+                #ff8000,
+                #ffff00,
+                #80ff00,
+                #00ff00,
+                #00ff80,
+                #00ffff,
+                #0080ff,
+                #0000ff,
+                #8000ff,
+                #ff0080);
+        background-size: 300% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        animation: holographic-gradient-move 8s linear infinite;
+        filter: drop-shadow(0 0 20px #00ffff) drop-shadow(0 0 40px #ff00ff);
+    }
+
+    /* Holographic with Chromatic Aberration */
+    .text-holographic-chromatic {
+        position: relative;
+        background: linear-gradient(90deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
+        background-size: 200% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        animation: holographic-gradient-move 5s linear infinite;
+    }
+
+    .text-holographic-chromatic::before,
+    .text-holographic-chromatic::after {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .text-holographic-chromatic::before {
+        background: linear-gradient(90deg, #ff0000, transparent, transparent);
+        animation: chromatic-aberration-1 3s ease-in-out infinite;
+    }
+
+    .text-holographic-chromatic::after {
+        background: linear-gradient(90deg, transparent, transparent, #00ffff);
+        animation: chromatic-aberration-2 3s ease-in-out infinite;
+    }
+
+    /* ==========================================
+     GLOWING GRADIENT TEXT EFFECTS
+     ========================================== */
+
+    /* Vibrant Gradient Glow */
+    .text-gradient-animated-glow {
+        background: linear-gradient(90deg,
+                #ff6b35 0%,
+                #f7931e 25%,
+                #fdc830 50%,
+                #ff6b35 100%);
+        background-size: 200% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        animation: vibrant-gradient-x 6s ease-in-out infinite;
+        filter: drop-shadow(0 0 8px #f7931ecc) drop-shadow(0 0 16px #fdc83099);
+    }
+
+    /* Ocean Glow */
+    .text-ocean-glow {
+        background: linear-gradient(90deg, #00D4FF, #0099FF, #0061FF, #00D4FF);
+        background-size: 200% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        animation: vibrant-gradient-x 5s ease-in-out infinite;
+        filter: drop-shadow(0 0 10px #00D4FF) drop-shadow(0 0 20px #0061FF) drop-shadow(0 0 30px #0099FF);
+    }
+
+    /* Neon Glow - Pink/Purple */
+    .text-neon-glow {
+        background: linear-gradient(90deg, #FF00FF, #9D00FF, #FF00FF);
+        background-size: 200% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        animation: vibrant-gradient-x 4s ease-in-out infinite;
+        filter: drop-shadow(0 0 12px #FF00FF) drop-shadow(0 0 24px #9D00FF) drop-shadow(0 0 36px #FF00FF);
+    }
+
+    /* Fire Glow */
+    .text-fire-glow {
+        background: linear-gradient(90deg, #FFE259, #FFA751, #FF4E50, #FFE259);
+        background-size: 200% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        animation: vibrant-gradient-x 3s ease-in-out infinite;
+        filter: drop-shadow(0 0 15px #FFA751) drop-shadow(0 0 30px #FF4E50);
+    }
+
+    /* ==========================================
+     NEON TEXT EFFECTS
+     ========================================== */
+
+    /* Classic Neon */
+    .text-neon-classic {
+        color: #fff;
+        text-shadow:
+            0 0 7px #fff,
+            0 0 10px #fff,
+            0 0 21px #fff,
+            0 0 42px #0ff,
+            0 0 82px #0ff,
+            0 0 92px #0ff,
+            0 0 102px #0ff,
+            0 0 151px #0ff;
+        animation: neon-flicker 1.5s infinite alternate;
+    }
+
+    /* Neon Pink */
+    .text-neon-pink {
+        color: #fff;
+        text-shadow:
+            0 0 7px #fff,
+            0 0 10px #ff00de,
+            0 0 21px #ff00de,
+            0 0 42px #ff00de,
+            0 0 82px #ff00de,
+            0 0 92px #ff00de,
+            0 0 102px #ff00de,
+            0 0 151px #ff00de;
+        animation: neon-pulse 2s ease-in-out infinite;
+    }
+
+    /* Neon Green */
+    .text-neon-green {
+        color: #fff;
+        text-shadow:
+            0 0 7px #fff,
+            0 0 10px #39ff14,
+            0 0 21px #39ff14,
+            0 0 42px #39ff14,
+            0 0 82px #39ff14,
+            0 0 92px #39ff14;
+        animation: neon-pulse 1.8s ease-in-out infinite;
+    }
+
+    /* ==========================================
+     3D AND DIMENSIONAL TEXT EFFECTS
+     ========================================== */
+
+    /* 3D Gradient Pop */
+    .text-3d-gradient {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        text-shadow:
+            0 1px 0 #c0c0c0,
+            0 2px 0 #b0b0b0,
+            0 3px 0 #a0a0a0,
+            0 4px 0 #909090,
+            0 5px 10px rgba(0, 0, 0, .3);
+        filter: drop-shadow(0 6px 12px rgba(102, 126, 234, 0.5));
+    }
+
+    /* Extruded 3D */
+    .text-extruded {
+        color: #fff;
+        text-shadow:
+            1px 1px 0 #ccc,
+            2px 2px 0 #aaa,
+            3px 3px 0 #888,
+            4px 4px 0 #666,
+            5px 5px 0 #444,
+            6px 6px 0 #222,
+            7px 7px 10px rgba(0, 0, 0, .6);
+    }
+
+    /* ==========================================
+     SHIMMER AND SHINE EFFECTS
+     ========================================== */
+
+    /* Liquid Metal Shimmer */
+    .text-liquid-metal {
+        background: linear-gradient(135deg,
+                #667eea 0%,
+                #764ba2 25%,
+                #f093fb 50%,
+                #764ba2 75%,
+                #667eea 100%);
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        animation: liquid-shimmer 4s ease-in-out infinite;
+        filter: drop-shadow(2px 2px 4px rgba(102, 126, 234, 0.4));
+    }
+
+    /* Diamond Shimmer */
+    .text-diamond-shimmer {
+        background: linear-gradient(90deg,
+                transparent 0%,
+                transparent 40%,
+                rgba(255, 255, 255, 0.8) 50%,
+                transparent 60%,
+                transparent 100%);
+        background-size: 200% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: #e0e0e0;
+        animation: diamond-shine 3s linear infinite;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    /* Gold Shimmer */
+    .text-gold-shimmer {
+        background: linear-gradient(90deg,
+                #b8860b,
+                #ffd700,
+                #ffed4e,
+                #ffd700,
+                #b8860b);
+        background-size: 200% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        animation: gold-shine 4s linear infinite;
+        filter: drop-shadow(0 2px 8px rgba(255, 215, 0, 0.6));
+    }
+
+    /* ==========================================
+     COSMIC AND SPACE EFFECTS
+     ========================================== */
+
+    /* Cosmic Nebula */
+    .text-cosmic-nebula {
+        background: linear-gradient(45deg,
+                #FF0080,
+                #7928CA,
+                #4361EE,
+                #7209B7,
+                #FF0080);
+        background-size: 300% 300%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        animation: cosmic-flow 8s ease-in-out infinite;
+        filter: drop-shadow(0 0 20px #7928CA) drop-shadow(0 0 40px #FF0080);
+    }
+
+    /* Starlight Twinkle */
+    .text-starlight {
+        background: linear-gradient(90deg, #fff, #f0f0f0, #fff);
+        background-size: 200% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        animation: starlight-twinkle 2s ease-in-out infinite;
+        filter: drop-shadow(0 0 5px #fff) drop-shadow(0 0 10px #e0e0ff);
+    }
+
+    /* Galaxy Swirl */
+    .text-galaxy {
+        background: linear-gradient(135deg,
+                #667eea 0%,
+                #764ba2 20%,
+                #f093fb 40%,
+                #4facfe 60%,
+                #00f2fe 80%,
+                #667eea 100%);
+        background-size: 400% 400%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        animation: galaxy-swirl 10s ease infinite;
+        filter: drop-shadow(0 0 15px rgba(118, 75, 162, 0.6));
+    }
+
+    /* ==========================================
+     GLITCH AND DISTORTION EFFECTS
+     ========================================== */
+
+    /* Glitch Text */
+    .text-glitch {
+        position: relative;
+        color: #fff;
+        animation: glitch-skew 1s infinite;
+    }
+
+    .text-glitch::before,
+    .text-glitch::after {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .text-glitch::before {
+        left: 2px;
+        text-shadow: -2px 0 #ff00de;
+        animation: glitch-anim-1 2s infinite linear alternate-reverse;
+    }
+
+    .text-glitch::after {
+        left: -2px;
+        text-shadow: -2px 0 #00fff9;
+        animation: glitch-anim-2 3s infinite linear alternate-reverse;
+    }
+
+    /* Rainbow Chromatic */
+    .text-rainbow-chromatic {
+        background: linear-gradient(90deg,
+                red,
+                orange,
+                yellow,
+                green,
+                blue,
+                indigo,
+                violet,
+                red);
+        background-size: 200% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        animation: rainbow-flow 8s linear infinite;
+        filter: drop-shadow(0 2px 10px rgba(255, 0, 255, 0.5));
+    }
+
+    /* ==========================================
+     DOT PATTERNS
+     ========================================== */
+
+    .bg-pattern-dots {
+        background-image: radial-gradient(circle, var(--pattern-color-2) 1px, transparent 1px);
+        background-size: var(--pattern-size-md) var(--pattern-size-md);
+    }
+
+    .bg-pattern-dots-sm {
+        background-image: radial-gradient(circle, var(--pattern-color-2) 0.5px, transparent 0.5px);
+        background-size: var(--pattern-size-sm) var(--pattern-size-sm);
+    }
+
+    .bg-pattern-dots-lg {
+        background-image: radial-gradient(circle, var(--pattern-color-2) 2px, transparent 2px);
+        background-size: var(--pattern-size-lg) var(--pattern-size-lg);
+    }
+
+    /* ==========================================
+     GRID PATTERNS
+     ========================================== */
+
+    .bg-pattern-grid {
+        background-image:
+            linear-gradient(var(--pattern-color-2) 1px, transparent 1px),
+            linear-gradient(90deg, var(--pattern-color-2) 1px, transparent 1px);
+        background-size: var(--pattern-size-md) var(--pattern-size-md);
+    }
+
+    .bg-pattern-grid-sm {
+        background-image:
+            linear-gradient(var(--pattern-color-2) 0.5px, transparent 0.5px),
+            linear-gradient(90deg, var(--pattern-color-2) 0.5px, transparent 0.5px);
+        background-size: var(--pattern-size-sm) var(--pattern-size-sm);
+    }
+
+    .bg-pattern-graph {
+        background-image:
+            linear-gradient(var(--pattern-color-1) 1px, transparent 1px),
+            linear-gradient(90deg, var(--pattern-color-1) 1px, transparent 1px),
+            linear-gradient(var(--pattern-color-3) 1px, transparent 1px),
+            linear-gradient(90deg, var(--pattern-color-3) 1px, transparent 1px);
+        background-size:
+            var(--pattern-size-lg) var(--pattern-size-lg),
+            var(--pattern-size-lg) var(--pattern-size-lg),
+            var(--pattern-size-md) var(--pattern-size-md),
+            var(--pattern-size-md) var(--pattern-size-md);
+    }
+
+    /* ==========================================
+     DIAGONAL PATTERNS
+     ========================================== */
+
+    .bg-pattern-diagonal-lines {
+        background-image: repeating-linear-gradient(45deg,
+                transparent,
+                transparent 10px,
+                var(--pattern-color-2) 10px,
+                var(--pattern-color-2) 11px);
+    }
+
+    .bg-pattern-diagonal-stripes {
+        background-image: repeating-linear-gradient(45deg,
+                var(--pattern-color-1),
+                var(--pattern-color-1) 10px,
+                var(--pattern-color-2) 10px,
+                var(--pattern-color-2) 20px);
+    }
+
+    /* ==========================================
+     GEOMETRIC PATTERNS
+     ========================================== */
+
+    .bg-pattern-checkerboard {
+        background-image:
+            linear-gradient(45deg, var(--pattern-color-2) 25%, transparent 25%),
+            linear-gradient(-45deg, var(--pattern-color-2) 25%, transparent 25%),
+            linear-gradient(45deg, transparent 75%, var(--pattern-color-2) 75%),
+            linear-gradient(-45deg, transparent 75%, var(--pattern-color-2) 75%);
+        background-size: var(--pattern-size-md) var(--pattern-size-md);
+        background-position:
+            0 0,
+            0 calc(var(--pattern-size-md) / 2),
+            calc(var(--pattern-size-md) / 2) calc(var(--pattern-size-md) / -2),
+            calc(var(--pattern-size-md) / -2) 0;
+    }
+
+    .bg-pattern-circles {
+        background-image:
+            radial-gradient(circle, var(--pattern-color-2) 10%, transparent 10%),
+            radial-gradient(circle, var(--pattern-color-2) 10%, transparent 10%);
+        background-size: var(--pattern-size-md) var(--pattern-size-md);
+        background-position: 0 0, calc(var(--pattern-size-md) / 2) calc(var(--pattern-size-md) / 2);
+    }
+
+    /* ==========================================
+     ANIMATED PATTERNS
+     ========================================== */
+
+    /* Moving Patterns */
+    .bg-pattern-animated-grid {
+        background-image:
+            linear-gradient(var(--pattern-color-2) 1px, transparent 1px),
+            linear-gradient(90deg, var(--pattern-color-2) 1px, transparent 1px);
+        background-size: var(--pattern-size-md) var(--pattern-size-md);
+        animation: pattern-move 20s linear infinite;
+    }
+
+    .bg-pattern-animated-dots {
+        background-image: radial-gradient(circle, var(--pattern-color-2) 1px, transparent 1px);
+        background-size: var(--pattern-size-md) var(--pattern-size-md);
+        animation: pattern-move 30s linear infinite;
+    }
+
+    /* Pulsing Patterns */
+    .bg-pattern-pulse-dots {
+        background-image: radial-gradient(circle, var(--pattern-color-3) 2px, transparent 2px);
+        background-size: var(--pattern-size-md) var(--pattern-size-md);
+        animation: pattern-pulse 3s ease-in-out infinite;
+    }
+
+    .bg-pattern-pulse-grid {
+        background-image:
+            linear-gradient(var(--pattern-color-3) 1.5px, transparent 1.5px),
+            linear-gradient(90deg, var(--pattern-color-3) 1.5px, transparent 1.5px);
+        background-size: var(--pattern-size-lg) var(--pattern-size-lg);
+        animation: pattern-pulse 4s ease-in-out infinite;
+    }
+
+    /* Wave Patterns */
+    .bg-pattern-wave-dots {
+        background-image: radial-gradient(circle, var(--pattern-color-2) 1.5px, transparent 1.5px);
+        background-size: var(--pattern-size-md) var(--pattern-size-md);
+        animation: pattern-wave 15s ease-in-out infinite;
+    }
+
+    .bg-pattern-wave-grid {
+        background-image:
+            linear-gradient(var(--pattern-color-2) 1px, transparent 1px),
+            linear-gradient(90deg, var(--pattern-color-2) 1px, transparent 1px);
+        background-size: var(--pattern-size-md) var(--pattern-size-md);
+        animation: pattern-wave 12s ease-in-out infinite;
+    }
+
+    /* Diagonal Sliding Patterns */
+    .bg-pattern-slide-stripes {
+        background-image: repeating-linear-gradient(45deg,
+                transparent,
+                transparent 15px,
+                var(--pattern-color-2) 15px,
+                var(--pattern-color-2) 30px);
+        animation: pattern-slide-diagonal 10s linear infinite;
+    }
+
+    .bg-pattern-slide-diagonals {
+        background-image:
+            repeating-linear-gradient(45deg, var(--pattern-color-1) 0px, var(--pattern-color-1) 10px, transparent 10px, transparent 20px),
+            repeating-linear-gradient(-45deg, var(--pattern-color-2) 0px, var(--pattern-color-2) 10px, transparent 10px, transparent 20px);
+        animation: pattern-slide-diagonal 8s linear infinite;
+    }
+
+    /* Zoom Patterns */
+    .bg-pattern-zoom-dots {
+        background-image: radial-gradient(circle, var(--pattern-color-3) 2px, transparent 2px);
+        background-size: var(--pattern-size-md) var(--pattern-size-md);
+        animation: pattern-zoom 6s ease-in-out infinite;
+    }
+
+    .bg-pattern-zoom-circles {
+        background-image:
+            radial-gradient(circle, var(--pattern-color-2) 15%, transparent 15%),
+            radial-gradient(circle, var(--pattern-color-2) 15%, transparent 15%);
+        background-size: var(--pattern-size-lg) var(--pattern-size-lg);
+        background-position: 0 0, calc(var(--pattern-size-lg) / 2) calc(var(--pattern-size-lg) / 2);
+        animation: pattern-zoom 8s ease-in-out infinite;
+    }
+
+    /* Rotating Patterns */
+    .bg-pattern-rotating-checkerboard {
+        background-image:
+            linear-gradient(45deg, var(--pattern-color-2) 25%, transparent 25%),
+            linear-gradient(-45deg, var(--pattern-color-2) 25%, transparent 25%),
+            linear-gradient(45deg, transparent 75%, var(--pattern-color-2) 75%),
+            linear-gradient(-45deg, transparent 75%, var(--pattern-color-2) 75%);
+        background-size: var(--pattern-size-md) var(--pattern-size-md);
+        background-position:
+            0 0,
+            0 calc(var(--pattern-size-md) / 2),
+            calc(var(--pattern-size-md) / 2) calc(var(--pattern-size-md) / -2),
+            calc(var(--pattern-size-md) / -2) 0;
+        animation: pattern-wave 20s ease-in-out infinite;
+    }
+
+    /* Color Shifting Patterns */
+    .bg-pattern-rainbow-dots {
+        background-image: radial-gradient(circle, currentColor 2px, transparent 2px);
+        background-size: var(--pattern-size-md) var(--pattern-size-md);
+        color: var(--pattern-color-3);
+        animation: pattern-color-shift 10s ease-in-out infinite;
+    }
+
+    .bg-pattern-rainbow-grid {
+        background-image:
+            linear-gradient(currentColor 1px, transparent 1px),
+            linear-gradient(90deg, currentColor 1px, transparent 1px);
+        background-size: var(--pattern-size-md) var(--pattern-size-md);
+        color: var(--pattern-color-3);
+        animation: pattern-color-shift 12s ease-in-out infinite;
+    }
+
+    /* Ultra Complex Animated Patterns */
+    .bg-pattern-animated-matrix {
+        background-image:
+            linear-gradient(0deg, transparent 24%, rgba(0, 255, 0, 0.3) 25%, rgba(0, 255, 0, 0.3) 26%, transparent 27%, transparent 74%, rgba(0, 255, 0, 0.3) 75%, rgba(0, 255, 0, 0.3) 76%, transparent 77%, transparent),
+            linear-gradient(90deg, transparent 24%, rgba(0, 255, 0, 0.3) 25%, rgba(0, 255, 0, 0.3) 26%, transparent 27%, transparent 74%, rgba(0, 255, 0, 0.3) 75%, rgba(0, 255, 0, 0.3) 76%, transparent 77%, transparent);
+        background-size: var(--pattern-size-xl) var(--pattern-size-xl);
+        animation: pattern-move 15s linear infinite, pattern-pulse 5s ease-in-out infinite;
+    }
+
+    .bg-pattern-animated-cosmic {
+        background-image:
+            radial-gradient(circle, rgba(147, 51, 234, 0.4) 1px, transparent 1px),
+            radial-gradient(circle, rgba(59, 130, 246, 0.3) 1px, transparent 1px);
+        background-size: var(--pattern-size-md) var(--pattern-size-md), calc(var(--pattern-size-md) * 1.5) calc(var(--pattern-size-md) * 1.5);
+        background-position: 0 0, calc(var(--pattern-size-md) / 2) calc(var(--pattern-size-md) / 2);
+        animation: pattern-wave 20s ease-in-out infinite, pattern-color-shift 15s linear infinite;
+    }
+
+    .bg-pattern-animated-neon-grid {
+        background-image:
+            linear-gradient(rgba(255, 0, 255, 0.4) 2px, transparent 2px),
+            linear-gradient(90deg, rgba(0, 255, 255, 0.4) 2px, transparent 2px);
+        background-size: var(--pattern-size-lg) var(--pattern-size-lg);
+        animation: pattern-move 12s linear infinite, pattern-color-shift 8s ease-in-out infinite;
+    }
+
+    /* ==========================================
+     GLASSMORPHISM
+     ========================================== */
+
+    .glass-card {
+        backdrop-filter: blur(12px) saturate(180%);
+        background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.1),
+                rgba(255, 255, 255, 0.05));
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .glass-gradient-sunset {
+        backdrop-filter: blur(12px) saturate(180%);
+        background: linear-gradient(135deg,
+                rgba(255, 107, 53, 0.1),
+                rgba(253, 200, 48, 0.05));
+        border: 1px solid rgba(255, 107, 53, 0.3);
+    }
+
+    .glass-gradient-ocean {
+        backdrop-filter: blur(12px) saturate(180%);
+        background: linear-gradient(135deg,
+                rgba(0, 212, 255, 0.1),
+                rgba(0, 97, 255, 0.05));
+        border: 1px solid rgba(0, 212, 255, 0.3);
+    }
+
+    /* ==========================================
+     HOVER EFFECTS
+     ========================================== */
+
+    .hover-glow:hover {
+        box-shadow: 0 0 30px currentColor;
+        transition: box-shadow 0.3s ease;
+    }
+
+    .hover-lift {
+        transition: all 0.3s ease;
+    }
+
+    .hover-lift:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* ============================================
+   COMPONENT LAYER
+   ============================================ */
+
+@layer components {
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem 1.5rem;
+        font-weight: 600;
+        border-radius: 1rem;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .btn-gradient {
+        background: linear-gradient(to right, var(--color-primary-500), var(--color-secondary-500));
+        color: white;
+    }
+
+    .btn-gradient:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .card {
+        background: white;
+        border-radius: 2rem;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+}

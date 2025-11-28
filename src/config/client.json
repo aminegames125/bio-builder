@@ -1,0 +1,29 @@
+{
+    "client_id": "builder",
+    "profile": {
+        "name": "Bio Builder",
+        "name_class": "text-holographic-ultra",
+        "title": "Create Your Perfect Bio",
+        "bio": "Visual bio builder with live preview. Use the editor below to create your bio!",
+        "avatar": "https://i.pravatar.cc/300?img=50",
+        "verified": true
+    },
+    "background": {
+        "type": "composite",
+        "composite_class": "bg-composite-animated-neon"
+    },
+    "layout": {
+        "type": "centered"
+    },
+    "header": {
+        "enabled": false
+    },
+    "footer": {
+        "enabled": false
+    },
+    "theme": {
+        "template": "centered"
+    },
+    "content_blocks": [],
+    "builder_mode": true
+}

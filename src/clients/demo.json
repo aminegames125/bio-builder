@@ -1,0 +1,102 @@
+{
+    "client_id": "demo",
+    "profile": {
+        "name": "Demo Bio",
+        "name_class": "text-holographic-ultra",
+        "title": "Welcome to the Bio System",
+        "bio": "This is a demonstration of the bio page system with React Router!",
+        "avatar": "https://i.pravatar.cc/300?img=10",
+        "verified": true,
+        "stats": [
+            {
+                "label": "Projects",
+                "value": "50+"
+            },
+            {
+                "label": "Clients",
+                "value": "100+"
+            }
+        ]
+    },
+    "background": {
+        "type": "animated-gradient",
+        "gradient_class": "gradient-animated-ocean"
+    },
+    "layout": {
+        "type": "centered",
+        "config": {
+            "max_width": "2xl",
+            "padding": "relaxed"
+        }
+    },
+    "header": {
+        "enabled": true,
+        "show_avatar": true,
+        "avatar_size": "xl",
+        "show_name": true,
+        "show_title": true,
+        "show_bio": true,
+        "show_stats": true
+    },
+    "theme": {
+        "template": "centered",
+        "colors": {
+            "primary": {
+                "500": "#0099FF"
+            }
+        },
+        "typography": {
+            "heading_font": "Inter",
+            "body_font": "Inter"
+        }
+    },
+    "content_blocks": [
+        {
+            "type": "text",
+            "content": "Welcome to Your Bio Page!",
+            "style": "h2",
+            "align": "center",
+            "className": "text-gradient-ocean"
+        },
+        {
+            "type": "text",
+            "content": "Built with React, Tailwind CSS, and React Router DOM",
+            "style": "body",
+            "align": "center"
+        },
+        {
+            "type": "spacer",
+            "height": 20
+        },
+        {
+            "type": "button",
+            "label": "Go to Builder",
+            "url": "/builder",
+            "style": "primary",
+            "className": "btn-gradient hover-glow"
+        },
+        {
+            "type": "divider",
+            "style": "gradient"
+        },
+        {
+            "type": "text",
+            "content": "✨ Features",
+            "style": "h2",
+            "align": "center"
+        },
+        {
+            "type": "list",
+            "title": "What's Included",
+            "items": [
+                "80+ Background options (gradients, patterns, composites, mesh, special effects)",
+                "40+ Text effects (holographic, glowing, neon, 3D, shimmer, cosmic)",
+                "37 Content block types",
+                "Visual Bio Builder with live preview",
+                "React Router DOM integration",
+                "JSON-driven configuration"
+            ]
+        }
+    ],
+    "social_links": []
+}
