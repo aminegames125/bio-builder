@@ -65,7 +65,7 @@ Follow these steps to get a local copy up and running.
 
 1.  **Clone the repository**
     ```bash
-    git clone https://github.com/aminegmaes125/bio-builder.git
+    git clone https://github.com/aminegames125/bio-builder.git
     cd bio-builder
     ```
 
