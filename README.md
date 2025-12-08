@@ -25,6 +25,9 @@
 
 Built with performance and aesthetics in mind, it leverages the latest web technologies to ensure your bio page is not just a list of links, but a full-fledged experience.
 
+> Note: The current builder UI is a **functional prototype** focused on the JSON/block model and editor architecture.  
+> Visual polish and a redesigned editor layout are planned next.
+
 ## 🚀 Key Features
 
 ### 🎨 **Visual Drag-and-Drop Builder**
