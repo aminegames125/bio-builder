@@ -32,7 +32,8 @@ const BackgroundPattern = ({ config }) => {
             mesh_class,
             special_class,
             animated_pattern,
-            composite_class
+            composite_class,
+            custom_class
         } = config;
 
         let classes = '';
@@ -59,6 +60,8 @@ const BackgroundPattern = ({ config }) => {
         } else if (type === 'special') {
             // Special effects (spotlight, laser, nebula)
             classes = special_class || 'bg-spotlight';
+        } else if (type === 'custom') {
+            classes = custom_class || '';
         } else if (type === 'animated-gradient') {
             // Animated gradient backgrounds
             classes = gradient_class || 'gradient-animated-sunset';

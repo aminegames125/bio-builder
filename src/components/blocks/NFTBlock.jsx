@@ -1,14 +1,65 @@
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
-const NFTBlock = ({ platform = 'opensea', contractAddress, tokenId, title, description }) => {
-    // Mock display for NFT since real embeds often require scripts or API calls
-    // In a real app, we might use the OpenSea Embed API or similar
+const NFTBlock = ({
+    platform = 'opensea',
+    contractAddress,
+    tokenId,
+    title,
+    name,
+    description,
+    image,
+    marketplace_url,
+    ctaText = 'View asset'
+}) => {
+    const [metadata, setMetadata] = useState(null);
+    const [error, setError] = useState(null);
 
     const getMarketplaceUrl = () => {
-        if (platform === 'opensea') return `https://opensea.io/assets/${contractAddress}/${tokenId}`;
-        if (platform === 'rarible') return `https://rarible.com/token/${contractAddress}:${tokenId}`;
+        if (marketplace_url) return marketplace_url;
+        if (platform === 'opensea' && contractAddress && tokenId) return `https://opensea.io/assets/${contractAddress}/${tokenId}`;
+        if (platform === 'rarible' && contractAddress && tokenId) return `https://rarible.com/token/${contractAddress}:${tokenId}`;
         return '#';
     };
+
+    useEffect(() => {
+        const apiKey = import.meta.env.VITE_OPENSEA_API_KEY;
+        if (!apiKey || !contractAddress || !tokenId) {
+            return;
+        }
+
+        const controller = new AbortController();
+
+        const fetchMetadata = async () => {
+            try {
+                const res = await fetch(
+                    `https://api.opensea.io/api/v2/chain/ethereum/contract/${contractAddress}/nfts/${tokenId}`,
+                    {
+                        headers: { 'X-API-KEY': apiKey },
+                        signal: controller.signal
+                    }
+                );
+
+                if (!res.ok) throw new Error(`OpenSea responded with ${res.status}`);
+                const json = await res.json();
+                setMetadata(json.nft || null);
+                setError(null);
+            } catch (err) {
+                if (controller.signal.aborted) return;
+                console.error('Failed to fetch NFT metadata', err);
+                setError('Could not load NFT metadata.');
+            }
+        };
+
+        fetchMetadata();
+
+        return () => controller.abort();
+    }, [contractAddress, tokenId, platform]);
+
+    const resolvedImage = metadata?.image_url || image;
+    const resolvedTitle = title || metadata?.name || name || (tokenId ? `NFT #${tokenId}` : 'NFT Asset');
+    const resolvedDescription = description || metadata?.description;
+    const resolvedMarketplaceUrl = getMarketplaceUrl();
 
     return (
         <motion.div
@@ -18,30 +69,45 @@ const NFTBlock = ({ platform = 'opensea', contractAddress, tokenId, title, descr
             className="bg-gray-900 rounded-2xl overflow-hidden shadow-xl border border-gray-800"
         >
             <div className="relative aspect-square bg-gray-800 flex items-center justify-center overflow-hidden">
-                {/* Placeholder for NFT Image - in real app would fetch metadata */}
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-600 to-blue-600 opacity-50 animate-pulse"></div>
-                <div className="relative z-10 text-center p-6">
+                {resolvedImage ? (
+                    <img
+                        src={resolvedImage}
+                        alt={resolvedTitle}
+                        className="absolute inset-0 w-full h-full object-cover"
+                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                    />
+                ) : (
+                    <div className="absolute inset-0 bg-gradient-to-br from-purple-600 to-blue-600 opacity-50 animate-pulse"></div>
+                )}
+                <div className="relative z-10 text-center p-6 bg-black/30 backdrop-blur-sm rounded-xl">
                     <span className="text-4xl mb-2 block">💎</span>
-                    <p className="text-white/50 text-xs uppercase tracking-widest">NFT Asset</p>
+                    <p className="text-white font-semibold">{resolvedTitle}</p>
+                    {contractAddress && tokenId && (
+                        <p className="text-white/60 text-xs mt-1">#{tokenId}</p>
+                    )}
                 </div>
 
-                {/* Platform Badge */}
-                <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-white border border-white/10">
-                    {platform === 'opensea' ? 'OpenSea' : 'Rarible'}
+                <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-white border border-white/10 capitalize">
+                    {platform}
                 </div>
             </div>
 
-            <div className="p-4">
-                <h3 className="text-white font-bold text-lg truncate">{title || `NFT #${tokenId}`}</h3>
-                {description && <p className="text-gray-400 text-sm mt-1 line-clamp-2">{description}</p>}
+            <div className="p-4 space-y-3">
+                {resolvedDescription && <p className="text-gray-400 text-sm line-clamp-3">{resolvedDescription}</p>}
+
+                {error && (
+                    <div className="text-xs text-amber-400 bg-amber-500/10 border border-amber-500/30 rounded-lg p-2">
+                        {error}
+                    </div>
+                )}
 
                 <a
-                    href={getMarketplaceUrl()}
+                    href={resolvedMarketplaceUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-4 block w-full py-2.5 bg-white text-black font-bold text-center rounded-xl hover:bg-gray-200 transition-colors"
+                    className="block w-full py-2.5 bg-white text-black font-bold text-center rounded-xl hover:bg-gray-200 transition-colors"
                 >
-                    View on {platform === 'opensea' ? 'OpenSea' : 'Rarible'}
+                    {ctaText} {platform ? `on ${platform.charAt(0).toUpperCase() + platform.slice(1)}` : ''}
                 </a>
             </div>
         </motion.div>

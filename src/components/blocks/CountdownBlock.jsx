@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-const CountdownBlock = ({ targetDate, title, theme = 'light' }) => {
+const CountdownBlock = ({ targetDate, date, title, theme = 'light' }) => {
     const [timeLeft, setTimeLeft] = useState({
         days: 0,
         hours: 0,
@@ -9,10 +9,14 @@ const CountdownBlock = ({ targetDate, title, theme = 'light' }) => {
         seconds: 0
     });
 
+    const target = targetDate || date;
+
     useEffect(() => {
+        if (!target) return undefined;
+
         const interval = setInterval(() => {
             const now = new Date().getTime();
-            const distance = new Date(targetDate).getTime() - now;
+            const distance = new Date(target).getTime() - now;
 
             if (distance < 0) {
                 clearInterval(interval);
@@ -28,7 +32,7 @@ const CountdownBlock = ({ targetDate, title, theme = 'light' }) => {
         }, 1000);
 
         return () => clearInterval(interval);
-    }, [targetDate]);
+    }, [target]);
 
     const TimeBox = ({ value, label }) => (
         <div className="flex flex-col items-center p-3 bg-white/10 backdrop-blur-md rounded-xl min-w-[70px]">

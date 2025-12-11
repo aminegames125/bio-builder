@@ -1,7 +1,17 @@
 import { motion } from 'framer-motion';
 
-const MapBlock = ({ address, title, height = 300, zoom = 15 }) => {
-    const encodedAddress = encodeURIComponent(address);
+const MapBlock = ({ address, location, title, height = 300, zoom = 15, apiKey }) => {
+    const resolvedAddress = address || location || 'New York, NY';
+    const encodedAddress = encodeURIComponent(resolvedAddress);
+
+    // Use Google Maps Embed API if API key is provided, otherwise use the free embed URL
+    const getMapUrl = () => {
+        if (apiKey) {
+            return `https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=${encodedAddress}&zoom=${zoom}`;
+        }
+        // Free Google Maps embed (no API key required, but has usage limits)
+        return `https://maps.google.com/maps?q=${encodedAddress}&t=&z=${zoom}&ie=UTF8&iwloc=&output=embed`;
+    };
 
     return (
         <motion.div
@@ -21,34 +31,9 @@ const MapBlock = ({ address, title, height = 300, zoom = 15 }) => {
                 loading="lazy"
                 allowFullScreen
                 referrerPolicy="no-referrer-when-downgrade"
-                src={`https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${encodedAddress}&zoom=${zoom}`}
+                src={getMapUrl()}
+                title={title || resolvedAddress}
             ></iframe>
-            {/* Note: In a real app, we'd need a Google Maps API Key. 
-          For demo purposes, we might use an iframe to OpenStreetMap or a static map image if no key is provided. 
-          Here is an OpenStreetMap alternative which doesn't require a key for simple embeds */}
-
-            <iframe
-                width="100%"
-                height={height}
-                frameBorder="0"
-                scrolling="no"
-                marginHeight="0"
-                marginWidth="0"
-                src={`https://www.openstreetmap.org/export/embed.html?bbox=-180,-90,180,90&layer=mapnik&marker=${encodedAddress}`} // This is a simplification, OSM needs coords usually
-                style={{ display: 'none' }} // Hiding this for now as OSM embed needs coords, not address directly without geocoding
-            ></iframe>
-
-            {/* Using a direct Google Maps Embed API (iframe mode) which works for places without a key sometimes or requires one. 
-           Let's use the standard embed URL format which is more robust for free usage limits */}
-            <iframe
-                width="100%"
-                height={height}
-                style={{ border: 0 }}
-                loading="lazy"
-                allowFullScreen
-                src={`https://maps.google.com/maps?q=${encodedAddress}&t=&z=${zoom}&ie=UTF8&iwloc=&output=embed`}
-            ></iframe>
-
         </motion.div>
     );
 };

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import * as LucideIcons from 'lucide-react';
+import { mapIconName } from '../../utils/iconMapper';
 
 const AnimatedIcon = ({
     name = 'Heart',
@@ -9,11 +10,12 @@ const AnimatedIcon = ({
     hover = true,
     className = ''
 }) => {
-    // Get icon component from lucide
-    const IconComponent = LucideIcons[name];
+    // Map friendly icon name to Lucide icon name
+    const lucideIconName = mapIconName(name);
+    const IconComponent = LucideIcons[lucideIconName];
 
     if (!IconComponent) {
-        console.warn(`Icon "${name}" not found`);
+        console.warn(`Icon "${name}" (mapped to "${lucideIconName}") not found in Lucide`);
         return null;
     }
 

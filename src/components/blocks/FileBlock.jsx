@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import AnimatedIcon from '../icons/AnimatedIcon';
 
-const FileBlock = ({ title, size, type = 'pdf', url, description }) => {
+const FileBlock = ({ title, filename, size, type = 'pdf', url, description }) => {
     const icons = {
         pdf: { name: 'FileText', color: '#FF5E5B' },
         zip: { name: 'FileArchive', color: '#FFDD00' },
@@ -10,6 +10,8 @@ const FileBlock = ({ title, size, type = 'pdf', url, description }) => {
     };
 
     const iconConfig = icons[type] || icons.doc;
+
+    const displayTitle = title || filename || 'Download file';
 
     return (
         <motion.a
@@ -32,7 +34,7 @@ const FileBlock = ({ title, size, type = 'pdf', url, description }) => {
                 </div>
 
                 <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-gray-900 truncate">{title}</h3>
+                    <h3 className="font-semibold text-gray-900 truncate">{displayTitle}</h3>
                     <div className="flex items-center gap-2 text-xs text-gray-500">
                         <span className="uppercase font-bold">{type}</span>
                         {size && (

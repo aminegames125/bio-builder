@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import AnimatedIcon from '../icons/AnimatedIcon';
 
-const AlertBlock = ({ type = 'info', title, message, icon, dismissible = false }) => {
+const AlertBlock = ({ type: typeProp = 'info', alertType, title, message, icon, dismissible = false }) => {
     const styles = {
         info: { bg: 'bg-blue-50', border: 'border-blue-100', text: 'text-blue-800', icon: 'Info', iconColor: '#3b82f6' },
         success: { bg: 'bg-green-50', border: 'border-green-100', text: 'text-green-800', icon: 'CheckCircle', iconColor: '#22c55e' },
@@ -9,7 +9,8 @@ const AlertBlock = ({ type = 'info', title, message, icon, dismissible = false }
         error: { bg: 'bg-red-50', border: 'border-red-100', text: 'text-red-800', icon: 'AlertOctagon', iconColor: '#ef4444' }
     };
 
-    const style = styles[type] || styles.info;
+    const effectiveType = alertType || typeProp || 'info';
+    const style = styles[effectiveType] || styles.info;
     const iconName = icon || style.icon;
 
     return (

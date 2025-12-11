@@ -2,16 +2,23 @@
 export const loadClientConfig = async (clientId = null) => {
     try {
         // Use import.meta.glob to find all client config files
-        // Relative path from src/utils/configLoader.js to src/clients/*.json
-        const clientConfigs = import.meta.glob('../clients/*.json');
+        // Relative path from src/utils/configLoader.js to src/clients
+        const clientJsons = import.meta.glob('../clients/*.json');
+        const clientMdxs = import.meta.glob('../clients/*.mdx', { query: '?raw', import: 'default' });
 
         let configModule;
 
         if (clientId) {
             // Try to find the specific client file
-            const path = `../clients/${clientId}.json`;
-            if (clientConfigs[path]) {
-                configModule = await clientConfigs[path]();
+            const jsonPath = `../clients/${clientId}.json`;
+            const mdxPath = `../clients/${clientId}.mdx`;
+            // Prefer MDX first
+            if (clientMdxs[mdxPath]) {
+                const raw = await clientMdxs[mdxPath]();
+                const { parseMDXClient } = await import('./mdxParser.js');
+                return parseMDXClient(raw);
+            } else if (clientJsons[jsonPath]) {
+                configModule = await clientJsons[jsonPath]();
             } else {
                 console.warn(`Client config not found: ${clientId}`);
                 return null;
@@ -19,9 +26,15 @@ export const loadClientConfig = async (clientId = null) => {
         } else {
             // Load default config if no clientId provided
             // You might want to define a default client or use a fallback
-            const defaultPath = '../clients/default.json';
-            if (clientConfigs[defaultPath]) {
-                configModule = await clientConfigs[defaultPath]();
+            const defaultJson = '../clients/default.json';
+            const defaultMdx = '../clients/default.mdx';
+            // Prefer MDX first
+            if (clientMdxs[defaultMdx]) {
+                const raw = await clientMdxs[defaultMdx]();
+                const { parseMDXClient } = await import('./mdxParser.js');
+                return parseMDXClient(raw);
+            } else if (clientJsons[defaultJson]) {
+                configModule = await clientJsons[defaultJson]();
             } else {
                 // Fallback to internal default if file not found
                 return getDefaultConfig();

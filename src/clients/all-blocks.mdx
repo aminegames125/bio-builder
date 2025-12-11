@@ -1,0 +1,310 @@
+---
+name: Everything Demo
+title: All Blocks Showcase
+layout: centered
+background_class: bg-gradient-ocean
+description: A single MDX client demonstrating all supported content blocks
+---
+
+```block type=text
+content: Welcome to the All Blocks Showcase
+style: h1
+align: center
+```
+
+```block type=spacer
+height: 20
+```
+
+```block type=divider
+style: gradient
+spacing: medium
+color: gray
+opacity: 50
+```
+
+```block type=hero
+title: Build your bio fast
+subtitle: MDX-powered blocks and custom backgrounds
+buttonText: Get Started
+url: https://example.com
+align: center
+```
+
+```block type=button
+label: Primary CTA Button
+url: https://example.com/cta
+style: primary
+```
+
+```block type=spacer
+height: 16
+```
+
+```block type=link_card
+title: Visit My Portfolio
+description: Hand-picked projects and case studies
+url: https://example.com/portfolio
+icon: 🚀
+icon_gradient: ["#7C3AED","#06B6D4"]
+featured: true
+thumbnail: https://picsum.photos/seed/portfolio/800/400
+```
+
+```block type=video_embed
+platform: youtube
+url: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+```
+
+```block type=gallery
+images:
+  - https://picsum.photos/seed/gallery1/800/600
+  - https://picsum.photos/seed/gallery2/800/600
+  - https://picsum.photos/seed/gallery3/800/600
+```
+
+```block type=carousel
+autoPlay: true
+interval: 3000
+slides:
+  - {"image": "https://picsum.photos/seed/car1/1200/600", "title": "Slide One", "description": "An eye-catching hero visual"}
+  - {"image": "https://picsum.photos/seed/car2/1200/600", "title": "Slide Two", "description": "Showcase your work in style"}
+  - {"image": "https://picsum.photos/seed/car3/1200/600", "title": "Slide Three", "description": "Make it memorable"}
+```
+
+```block type=image_compare
+before: https://picsum.photos/seed/before/1200/600
+after: https://picsum.photos/seed/after/1200/600
+```
+
+```block type=contact_form
+fields:
+  - name
+  - email
+  - message
+button_text: Send Message
+```
+
+```block type=newsletter_signup
+title: Stay in the loop
+description: Get occasional updates about new projects and articles
+placeholder: Enter your email
+button_text: Subscribe
+```
+
+```block type=music_player
+platform: spotify
+url: https://open.spotify.com/track/7ouMYWpwJ422jRcDASZB7P
+title: Favorite Track
+artist: Artist Name
+```
+
+```block type=map
+height: 300
+zoom: 12
+```
+
+```block type=countdown
+title: Launch Countdown
+date: 2025-12-31T23:59:59Z
+theme: dark
+```
+
+```block type=faq
+title: Frequently Asked Questions
+questions:
+  - {"question": "What is this page?", "answer": "A comprehensive demo of all blocks."}
+  - {"question": "Can I customize blocks?", "answer": "Yes, via MDX props and themes."}
+```
+
+```block type=text
+content: Data Display Blocks
+style: h2
+align: left
+```
+
+```block type=stats
+layout: grid
+items:
+  - Users: 12K
+  - Projects: 48
+  - Uptime: 99.9%
+```
+
+```block type=table
+title: Feature Comparison
+headers:
+  - Plan
+  - Storage
+  - Support
+rows:
+  - Free | 5GB | Community
+  - Pro | 100GB | Priority
+  - Enterprise | Unlimited | Dedicated
+striped: true
+```
+
+```block type=skill_bar
+showPercentage: true
+skills:
+  - JavaScript: 90
+  - React: 85
+  - Design: 70
+```
+
+```block type=timeline
+items:
+  - 2022-01-01 | Started Project | Initial planning and prototypes
+  - 2023-06-10 | v1 Launch | Public release and feedback
+  - 2024-03-15 | v2 Launch | Major redesign and features
+```
+
+```block type=avatar_group
+limit: 5
+size: md
+avatars:
+  - https://i.pravatar.cc/100?img=1
+  - https://i.pravatar.cc/100?img=2
+  - https://i.pravatar.cc/100?img=3
+  - https://i.pravatar.cc/100?img=4
+  - https://i.pravatar.cc/100?img=5
+  - https://i.pravatar.cc/100?img=6
+```
+
+```block type=testimonial
+quote: This toolkit made building my bio page fun and fast!
+author: Jamie Dev
+role: Frontend Engineer
+avatar: https://i.pravatar.cc/100?img=15
+rating: 5
+style: card
+```
+
+```block type=accordion
+items:
+  - {"title": "Section 1", "content": "Details about section 1."}
+  - {"title": "Section 2", "content": "Details about section 2."}
+allowMultiple: true
+```
+
+```block type=tabs
+tabs:
+  - {"label": "Overview", "title": "Overview", "content": "Quick summary across blocks."}
+  - {"label": "Details", "title": "Details", "content": "Extended information and context."}
+  - {"label": "Notes", "title": "Notes", "content": "Miscellaneous comments and tips."}
+style: pill
+```
+
+```block type=list
+title: Highlights
+items:
+  - Fast MDX authoring
+  - 37 block types
+  - Smart defaults
+  - Flexible data shapes
+type: check
+```
+
+```block type=code
+title: Example Configuration
+language: json
+lines:
+  - {
+  -   "layout": "centered",
+  -   "theme": { "primary": "#0066FF" }
+  - }
+```
+
+```block type=alert
+title: Heads up!
+message: This is a demo alert block.
+type: success
+dismissible: true
+```
+
+```block type=share
+url: https://example.com
+platforms: twitter, linkedin, reddit
+```
+
+```block type=social_feed
+platform: twitter
+handle: vercel
+posts_count: 3
+```
+
+```block type=github_repo
+owner: vercel
+name: next.js
+show_stats: true
+```
+
+```block type=calendly
+url: https://calendly.com/acme/30min
+height: 600
+```
+
+```block type=product
+name: Super Gadget
+price: 49
+currency: $
+buttonText: Buy Now
+url: https://example.com/product
+```
+
+```block type=pricing
+title: Pro Max
+price: 49
+currency: $
+period: /month
+features:
+  - Unlimited projects
+  - Priority support (24/7)
+  - Advanced analytics & reports
+  - Custom domain
+buttonText: Upgrade Now
+url: https://example.com/pricing/pro-max
+popular: true
+```
+
+```block type=donation
+platform: kofi
+buttonText: Support
+url: https://ko-fi.com/example
+```
+
+```block type=nft
+platform: opensea
+title: Shiny Collectible #1
+image: https://picsum.photos/seed/nft/600/600
+marketplace_url: https://opensea.io/assets/ethereum/0x1234/1
+ctaText: View
+```
+
+```block type=file
+url: https://example.com/files/resume.pdf
+name: Resume
+type: PDF
+size: 2 MB
+description: My latest resume.
+```
+
+```block type=qr
+data: https://example.com
+size: 128
+```
+
+```block type=chat
+title: Quick Chat
+welcome_message: Hello! How can I help?
+```
+
+```block type=text
+content: Footer Section
+style: caption
+align: center
+```
+
+```block type=spacer
+height: 24
+```

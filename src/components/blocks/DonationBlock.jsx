@@ -31,7 +31,8 @@ const DonationBlock = ({ platform = 'kofi', username, title, description, button
     };
 
     const config = platforms[platform] || platforms.kofi;
-    const url = username && username.startsWith('http') ? username : `${config.urlPrefix}${username || ''}`;
+    const uname = typeof username === 'string' ? username : String(username ?? '');
+    const url = uname && uname.startsWith('http') ? uname : `${config.urlPrefix}${uname}`;
 
     return (
         <motion.div

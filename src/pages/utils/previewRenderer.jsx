@@ -16,6 +16,7 @@ import Newsletter from '../../components/blocks/Newsletter';
 import ShareBlock from '../../components/blocks/ShareBlock';
 import ProductBlock from '../../components/blocks/ProductBlock';
 import PricingBlock from '../../components/blocks/PricingBlock';
+import HeroBlock from '../../components/blocks/HeroBlock';
 import DonationBlock from '../../components/blocks/DonationBlock';
 import SocialFeedBlock from '../../components/blocks/SocialFeedBlock';
 import NFTBlock from '../../components/blocks/NFTBlock';
@@ -83,6 +84,8 @@ export function renderPreviewBlock(block) {
                 return <ProductBlock {...block} />;
             case 'pricing':
                 return <PricingBlock {...block} />;
+            case 'hero':
+                return <HeroBlock {...block} />;
             case 'donation':
                 return <DonationBlock {...block} />;
             case 'nft':

@@ -88,18 +88,15 @@ const BioBuilder = () => {
 
     const updateBackground = (category, className) => {
         const type = getBackgroundType(category);
-
-        // Determine the correct property name based on type
         let update = { type };
-
         if (type === 'mesh') update.mesh_class = className;
         else if (type === 'special') update.special_class = className;
         else if (type === 'animated-pattern') update.animated_pattern = className;
         else if (type === 'pattern') update.pattern = className;
         else if (type === 'composite') update.composite_class = className;
         else if (type === 'animated-gradient') update.gradient_class = className;
-        else update.gradient_class = className; // default gradient
-
+        else if (type === 'custom') update.custom_class = className;
+        else update.gradient_class = className;
         setConfig(prev => ({
             ...prev,
             background: update
@@ -494,6 +491,7 @@ const ProfileEditor = ({ profile, onUpdate, theme }) => {
 
 const BackgroundSelector = ({ currentBg, options, onSelect, theme }) => {
     const [expandedCategory, setExpandedCategory] = useState(null);
+    const [customClass, setCustomClass] = useState('');
     const isDark = theme === 'dark';
     const buttonClass = isDark ? 'hover:bg-white/5' : 'hover:bg-black/5';
 
@@ -549,6 +547,24 @@ const BackgroundSelector = ({ currentBg, options, onSelect, theme }) => {
                         </AnimatePresence>
                     </div>
                 ))}
+            </div>
+            <div className={`mt-4 p-4 rounded-xl border ${isDark ? 'border-white/10 bg-black/20' : 'border-black/10 bg-white'}`}>
+                <div className={`font-semibold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>Custom CSS background class</div>
+                <div className="flex gap-3">
+                    <input
+                        type="text"
+                        value={customClass}
+                        onChange={(e) => setCustomClass(e.target.value)}
+                        placeholder="e.g. bg-gradient-ocean or your own class"
+                        className={`flex-1 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-blue-500/50 transition-all ${isDark ? 'bg-black/20 border-white/10 text-white' : 'bg-white border-gray-200 text-gray-900'}`}
+                    />
+                    <button
+                        onClick={() => customClass && onSelect('Custom', customClass)}
+                        className={`px-4 py-3 rounded-xl font-medium ${isDark ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
+                    >
+                        Apply
+                    </button>
+                </div>
             </div>
         </div>
     );

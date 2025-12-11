@@ -1,12 +1,13 @@
-const AvatarGroupBlock = ({ avatars, limit = 5, size = 'md' }) => {
+const AvatarGroupBlock = ({ avatars = [], limit = 5, size = 'md' }) => {
     const sizes = {
         sm: 'size-8 text-xs',
         md: 'size-10 text-sm',
         lg: 'size-12 text-base'
     };
 
-    const displayAvatars = avatars.slice(0, limit);
-    const remaining = avatars.length - limit;
+    const normalized = avatars.map(a => typeof a === 'string' ? { src: a } : a);
+    const displayAvatars = normalized.slice(0, limit);
+    const remaining = normalized.length - limit;
     const sizeClass = sizes[size] || sizes.md;
 
     return (

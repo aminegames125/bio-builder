@@ -46,6 +46,8 @@ import ProductBlock from './components/blocks/ProductBlock';
 // @ts-expect-error - JS module without types
 import PricingBlock from './components/blocks/PricingBlock';
 // @ts-expect-error - JS module without types
+import HeroBlock from './components/blocks/HeroBlock';
+// @ts-expect-error - JS module without types
 import DonationBlock from './components/blocks/DonationBlock';
 // @ts-expect-error - JS module without types
 import SocialFeedBlock from './components/blocks/SocialFeedBlock';
@@ -107,6 +109,7 @@ registerComponent('divider', DividerBlock);
 registerComponent('share', ShareBlock);
 registerComponent('product', ProductBlock);
 registerComponent('pricing', PricingBlock);
+registerComponent('hero', HeroBlock);
 registerComponent('donation', DonationBlock);
 registerComponent('social_feed', SocialFeedBlock);
 registerComponent('nft', NFTBlock);

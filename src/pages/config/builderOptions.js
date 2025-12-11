@@ -2,7 +2,7 @@
 // BLOCK TYPES - All available content blocks organized by category
 // ============================================
 export const BLOCK_TYPES = {
-    'Basic': ['text', 'button', 'divider', 'spacer'],
+    'Basic': ['text', 'button', 'divider', 'spacer', 'hero'],
     'Links & Social': ['link_card', 'share'],
     'Media': ['video_embed', 'music_player', 'gallery', 'carousel', 'image_compare'],
     'Forms': ['contact_form', 'newsletter_signup'],

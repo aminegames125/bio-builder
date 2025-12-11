@@ -18,7 +18,8 @@ export function getBackgroundType(category) {
         // Special types
         'Composite': 'composite',
         'Mesh': 'mesh',
-        'Special': 'special'
+        'Special': 'special',
+        'Custom': 'custom'
     };
 
     return typeMap[category] || 'gradient';

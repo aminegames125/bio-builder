@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import AnimatedIcon from '../icons/AnimatedIcon';
 
-const ChatBlock = ({ platform, username, label }) => {
+const ChatBlock = ({ platform, username, label, messages = [] }) => {
     const platforms = {
         whatsapp: {
             color: '#25D366',
@@ -30,8 +30,33 @@ const ChatBlock = ({ platform, username, label }) => {
     };
 
     const config = platforms[platform] || platforms.whatsapp;
-    const url = username && username.startsWith('http') ? username : `${config.prefix}${username || ''}`;
+    const uname = typeof username === 'string' ? username : String(username ?? '');
+    const url = uname && uname.startsWith('http') ? uname : `${config.prefix}${uname}`;
     const displayLabel = label || config.label;
+
+    // Backward compatibility: render static chat transcript when messages are provided and no platform is set
+    if (!platform && messages?.length) {
+        return (
+            <div className="w-full p-4 rounded-xl shadow-sm border border-gray-100 bg-white space-y-3">
+                {messages.map((msg, idx) => {
+                    const isUser = msg.sender?.toLowerCase() === 'user';
+                    return (
+                        <div key={idx} className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}>
+                            <div
+                                className={`max-w-[75%] px-3 py-2 rounded-2xl text-sm ${isUser
+                                    ? 'bg-blue-600 text-white rounded-br-none'
+                                    : 'bg-gray-100 text-gray-800 rounded-bl-none'
+                                    }`}
+                            >
+                                <div className="text-[10px] uppercase tracking-wide opacity-70 mb-0.5">{msg.sender}</div>
+                                <div>{msg.message}</div>
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
+        );
+    }
 
     return (
         <motion.a

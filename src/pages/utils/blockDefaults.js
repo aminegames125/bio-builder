@@ -10,7 +10,12 @@ export function getBlockDefaults(type) {
             type: 'text',
             content: 'New text block',
             style: 'paragraph',
-            align: 'left'
+            align: 'left',
+            icon: null,
+            iconPosition: 'before',
+            iconSize: null,
+            iconAnimation: 'scale',
+            iconColor: null
         },
         button: {
             type: 'button',
@@ -26,6 +31,13 @@ export function getBlockDefaults(type) {
             type: 'spacer',
             height: 40
         },
+        hero: {
+            type: 'hero',
+            title: 'Welcome to My Space',
+            subtitle: 'Crafting modern web experiences',
+            buttonText: 'Get Started',
+            url: '#'
+        },
 
         // Links & Social
         link_card: {
@@ -38,8 +50,10 @@ export function getBlockDefaults(type) {
         },
         share: {
             type: 'share',
-            platforms: ['twitter', 'facebook', 'linkedin'],
-            animation: 'bounce'
+            title: 'Share this page',
+            text: 'Check out my links and projects!',
+            url: 'https://example.com',
+            platforms: ['twitter', 'facebook', 'linkedin']
         },
 
         // Media
@@ -104,12 +118,18 @@ export function getBlockDefaults(type) {
         },
         donation: {
             type: 'donation',
+            platform: 'kofi',
+            username: 'creatorname',
             title: 'Support My Work',
-            amounts: [5, 10, 25, 50]
+            description: 'If you enjoy my work, consider buying me a coffee!',
+            buttonText: 'Support on Ko-fi'
         },
         nft: {
             type: 'nft',
-            name: 'NFT Collection',
+            platform: 'opensea',
+            contractAddress: '0x0000000000000000000000000000000000000000',
+            tokenId: '1',
+            title: 'Featured NFT',
             image: 'https://picsum.photos/400/400',
             description: 'NFT description'
         },
@@ -203,12 +223,14 @@ export function getBlockDefaults(type) {
         social_feed: {
             type: 'social_feed',
             platform: 'twitter',
-            username: '@username',
-            posts_count: 3
+            username: 'username',
+            posts_count: 3,
+            height: 420
         },
         github_repo: {
             type: 'github_repo',
-            repo: 'username/repo',
+            username: 'aminegames125',
+            repo: 'bio-builder',
             show_stats: true
         },
         calendly: {
@@ -223,26 +245,29 @@ export function getBlockDefaults(type) {
         },
         chat: {
             type: 'chat',
-            messages: [
-                { sender: 'User', message: 'Hello!' },
-                { sender: 'Bot', message: 'Hi there!' }
-            ]
+            platform: 'whatsapp',
+            username: '1234567890',
+            label: 'Chat on WhatsApp'
         },
         file: {
             type: 'file',
-            filename: 'document.pdf',
-            url: '#',
-            size: '2.5 MB'
+            title: 'Download Resume',
+            url: 'https://example.com/resume.pdf',
+            size: '2.5 MB',
+            type: 'pdf',
+            description: 'Latest version of my CV.'
         },
         countdown: {
             type: 'countdown',
-            date: '2025-12-31T23:59:59',
-            title: 'New Year Countdown'
+            targetDate: '2025-12-31T23:59:59',
+            title: 'New Year Countdown',
+            theme: 'light'
         },
         map: {
             type: 'map',
-            location: 'New York, NY',
-            zoom: 12
+            address: 'New York, NY',
+            zoom: 12,
+            title: 'Visit us'
         }
     };
 

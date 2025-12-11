@@ -1,10 +1,12 @@
 import { motion } from 'framer-motion';
 import AnimatedIcon from '../icons/AnimatedIcon';
 
-const ListBlock = ({ items = [], type = 'bullet', title }) => {
+const ListBlock = ({ items = [], type: listTypeProp = 'bullet', list_style, title }) => {
     if (!items || items.length === 0) {
         return null;
     }
+
+    const type = list_style || listTypeProp;
 
     return (
         <div className="w-full bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">

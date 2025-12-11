@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
 
-const StatsBlock = ({ stats = [], layout = 'grid' }) => {
+const StatsBlock = ({ stats: statsProp = [], items = [], layout = 'grid' }) => {
     // Don't render if no stats provided
+    const stats = (statsProp && statsProp.length ? statsProp : items);
     if (!stats || stats.length === 0) {
         return null;
     }
