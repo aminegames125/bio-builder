@@ -1,6 +1,6 @@
 import { Routes, Route, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import type { ComponentType, SVGProps } from 'react';
+import type { ComponentType, SVGProps, ReactElement } from 'react';
 
 // @ts-expect-error - JS module without types
 import { loadClientConfig } from './utils/configLoader';
@@ -135,7 +135,7 @@ const MDXText = (props: MDXTextProps) => {
         justify: 'text-justify'
     };
     const renderInline = (s: string) => {
-        const nodes: (string | JSX.Element)[] = [];
+        const nodes: (string | ReactElement)[] = [];
         let remaining = s;
         const regex = /(\[([^\]]+)\]\(([^)]+)\))|(`([^`]+)`)|(\*\*([^*]+)\*\*)|(__(.+?)__)|(\*(.+?)\*)|(_(.+?)_)|(~~(.+?)~~)/;
         while (remaining.length) {
@@ -177,7 +177,8 @@ const MDXText = (props: MDXTextProps) => {
         }
     };
     const lucideIconName = props.icon ? mapIconName(props.icon) : null;
-    const IconComponent: ComponentType<SVGProps<SVGSVGElement>> | null = lucideIconName ? (LucideIcons as unknown as Record<string, ComponentType<SVGProps<SVGSVGElement>> >)[lucideIconName] : null;
+    type LucideIconProps = SVGProps<SVGSVGElement> & { size?: number; color?: string; className?: string };
+    const IconComponent: ComponentType<LucideIconProps> | null = lucideIconName ? (LucideIcons as unknown as Record<string, ComponentType<LucideIconProps> >)[lucideIconName] : null;
     const cls = `${styles[props.style || 'paragraph']} ${alignment[props.align || 'left']} ${props.className || ''}`.trim();
     const iconEl = IconComponent ? (
         <IconComponent
@@ -275,7 +276,7 @@ const ClientPage = () => {
 
 	if (loading) {
 		return (
-			<div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 to-secondary-50">
+            <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-primary-50 to-secondary-50">
 				<div className="text-center">
 					<div className="inline-block size-16 border-4 border-primary-500 border-t-transparent rounded-full animate-spin mb-4"></div>
 					<p className="text-gray-600 font-medium">Loading...</p>
