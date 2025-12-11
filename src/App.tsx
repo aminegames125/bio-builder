@@ -104,7 +104,31 @@ registerComponent('music_player', MusicBlock);
 registerComponent('map', MapBlock);
 registerComponent('countdown', CountdownBlock);
 registerComponent('faq', FAQBlock);
-registerComponent('text', TextBlock);
+const MDXText = (props) => {
+    const styles: Record<string, string> = {
+        h1: 'text-3xl font-bold mb-4',
+        h2: 'text-2xl font-bold mb-3',
+        h3: 'text-xl font-semibold mb-2',
+        paragraph: 'text-base leading-relaxed mb-4',
+        quote: 'text-lg italic border-l-4 border-primary-500 pl-4 py-2 my-4 bg-gray-50 rounded-r-lg',
+        caption: 'text-sm text-gray-500 uppercase tracking-wide'
+    };
+    const alignment: Record<string, string> = {
+        left: 'text-left',
+        center: 'text-center',
+        right: 'text-right',
+        justify: 'text-justify'
+    };
+    if (!props.from_markdown) return <TextBlock {...props} />;
+    const cls = `${styles[props.style || 'paragraph']} ${alignment[props.align || 'left']} ${props.className || ''}`.trim();
+    if (props.style === 'h1') return <h1 className={cls}>{props.content}</h1>;
+    if (props.style === 'h2') return <h2 className={cls}>{props.content}</h2>;
+    if (props.style === 'h3') return <h3 className={cls}>{props.content}</h3>;
+    if (props.style === 'quote') return <blockquote className={cls}>{props.content}</blockquote>;
+    if (props.style === 'caption') return <small className={cls}>{props.content}</small>;
+    return <p className={cls}>{props.content}</p>;
+};
+registerComponent('text', MDXText);
 registerComponent('divider', DividerBlock);
 registerComponent('share', ShareBlock);
 registerComponent('product', ProductBlock);

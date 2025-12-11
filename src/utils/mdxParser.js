@@ -166,13 +166,13 @@ function parseMarkdownToBlocks(text) {
     let codeLines = [];
     const flushParagraph = () => {
         if (paragraph.length) {
-            blocks.push({ type: 'text', content: paragraph.join(' ').trim(), style: 'paragraph', align: 'left' });
+            blocks.push({ type: 'text', content: paragraph.join(' ').trim(), style: 'paragraph', align: 'left', from_markdown: true });
             paragraph = [];
         }
     };
     const flushList = () => {
         if (listItems.length) {
-            const obj = { type: 'list', items: listItems.slice() };
+            const obj = { type: 'list', items: listItems.slice(), from_markdown: true };
             if (listType === 'number') obj.list_style = 'number';
             else obj.list_style = 'bullet';
             blocks.push(obj);
@@ -182,7 +182,7 @@ function parseMarkdownToBlocks(text) {
     };
     const flushCode = () => {
         if (codeLines.length) {
-            blocks.push({ type: 'code', language: codeLang || 'text', code: codeLines.join('\n') });
+            blocks.push({ type: 'code', language: codeLang || 'text', code: codeLines.join('\n'), from_markdown: true });
             codeLines = [];
             codeLang = null;
         }
@@ -217,14 +217,14 @@ function parseMarkdownToBlocks(text) {
             flushList();
             const level = heading[1].length;
             const content = heading[2].trim();
-            blocks.push({ type: 'text', content, style: level === 1 ? 'h1' : level === 2 ? 'h2' : 'h3', align: 'left' });
+            blocks.push({ type: 'text', content, style: level === 1 ? 'h1' : level === 2 ? 'h2' : 'h3', align: 'left', from_markdown: true });
             continue;
         }
         const quote = line.match(/^>\s?(.*)$/);
         if (quote) {
             flushParagraph();
             flushList();
-            blocks.push({ type: 'text', content: quote[1].trim(), style: 'quote', align: 'left' });
+            blocks.push({ type: 'text', content: quote[1].trim(), style: 'quote', align: 'left', from_markdown: true });
             continue;
         }
         if (/^[-*]\s+/.test(line)) {
@@ -245,7 +245,7 @@ function parseMarkdownToBlocks(text) {
         if (/^\s*([-*_]{3,})\s*$/.test(line)) {
             flushParagraph();
             flushList();
-            blocks.push({ type: 'divider', style: 'solid', spacing: 'medium', color: 'gray', opacity: 50 });
+            blocks.push({ type: 'divider', style: 'solid', spacing: 'medium', color: 'gray', opacity: 50, from_markdown: true });
             continue;
         }
         paragraph.push(line.trim());
