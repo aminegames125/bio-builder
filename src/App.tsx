@@ -104,7 +104,14 @@ registerComponent('music_player', MusicBlock);
 registerComponent('map', MapBlock);
 registerComponent('countdown', CountdownBlock);
 registerComponent('faq', FAQBlock);
-const MDXText = (props) => {
+type MDXTextProps = {
+    content?: string;
+    style?: 'h1' | 'h2' | 'h3' | 'paragraph' | 'quote' | 'caption';
+    align?: 'left' | 'center' | 'right' | 'justify';
+    className?: string;
+    from_markdown?: boolean;
+};
+const MDXText = (props: MDXTextProps) => {
     const styles: Record<string, string> = {
         h1: 'text-3xl font-bold mb-4',
         h2: 'text-2xl font-bold mb-3',
@@ -119,14 +126,47 @@ const MDXText = (props) => {
         right: 'text-right',
         justify: 'text-justify'
     };
+    const renderInline = (s: string) => {
+        const nodes: (string | JSX.Element)[] = [];
+        let remaining = s;
+        const regex = /(\[([^\]]+)\]\(([^)]+)\))|(`([^`]+)`)|(\*\*([^*]+)\*\*)|(__(.+?)__)|(\*(.+?)\*)|(_(.+?)_)|(~~(.+?)~~)/;
+        while (remaining.length) {
+            const m = remaining.match(regex);
+            if (!m) { nodes.push(remaining); break; }
+            const idx = m.index ?? 0;
+            if (idx > 0) nodes.push(remaining.slice(0, idx));
+            const full = m[0];
+            if (m[1]) { // link
+                const text = m[2];
+                const url = m[3];
+                nodes.push(<a href={url} className="text-primary-600 hover:underline" target="_blank" rel="noopener noreferrer">{text}</a>);
+            } else if (m[4]) { // code
+                const code = m[5];
+                nodes.push(<code className="px-1 py-0.5 bg-gray-100 rounded text-sm font-mono">{code}</code>);
+            } else if (m[6]) { // **bold**
+                nodes.push(<strong>{m[7]}</strong>);
+            } else if (m[8]) { // __bold__
+                nodes.push(<strong>{m[9]}</strong>);
+            } else if (m[10]) { // *italic*
+                nodes.push(<em>{m[11]}</em>);
+            } else if (m[12]) { // _italic_
+                nodes.push(<em>{m[13]}</em>);
+            } else if (m[14]) { // ~~strike~~
+                nodes.push(<del>{m[15]}</del>);
+            }
+            remaining = remaining.slice(idx + full.length);
+        }
+        return nodes;
+    };
     if (!props.from_markdown) return <TextBlock {...props} />;
     const cls = `${styles[props.style || 'paragraph']} ${alignment[props.align || 'left']} ${props.className || ''}`.trim();
-    if (props.style === 'h1') return <h1 className={cls}>{props.content}</h1>;
-    if (props.style === 'h2') return <h2 className={cls}>{props.content}</h2>;
-    if (props.style === 'h3') return <h3 className={cls}>{props.content}</h3>;
-    if (props.style === 'quote') return <blockquote className={cls}>{props.content}</blockquote>;
-    if (props.style === 'caption') return <small className={cls}>{props.content}</small>;
-    return <p className={cls}>{props.content}</p>;
+    const content = props.content || '';
+    if (props.style === 'h1') return <h1 className={cls}>{renderInline(content)}</h1>;
+    if (props.style === 'h2') return <h2 className={cls}>{renderInline(content)}</h2>;
+    if (props.style === 'h3') return <h3 className={cls}>{renderInline(content)}</h3>;
+    if (props.style === 'quote') return <blockquote className={cls}>{renderInline(content)}</blockquote>;
+    if (props.style === 'caption') return <small className={cls}>{renderInline(content)}</small>;
+    return <p className={cls}>{renderInline(content)}</p>;
 };
 registerComponent('text', MDXText);
 registerComponent('divider', DividerBlock);

@@ -159,6 +159,7 @@ function parseMarkdownToBlocks(text) {
     const lines = text.split(/\r?\n/);
     const blocks = [];
     let paragraph = [];
+    let paragraphAlign = null;
     let listItems = [];
     let listType = null;
     let inCode = false;
@@ -166,8 +167,9 @@ function parseMarkdownToBlocks(text) {
     let codeLines = [];
     const flushParagraph = () => {
         if (paragraph.length) {
-            blocks.push({ type: 'text', content: paragraph.join(' ').trim(), style: 'paragraph', align: 'left', from_markdown: true });
+            blocks.push({ type: 'text', content: paragraph.join(' ').trim(), style: 'paragraph', align: paragraphAlign || 'left', from_markdown: true });
             paragraph = [];
+            paragraphAlign = null;
         }
     };
     const flushList = () => {
@@ -216,8 +218,11 @@ function parseMarkdownToBlocks(text) {
             flushParagraph();
             flushList();
             const level = heading[1].length;
-            const content = heading[2].trim();
-            blocks.push({ type: 'text', content, style: level === 1 ? 'h1' : level === 2 ? 'h2' : 'h3', align: 'left', from_markdown: true });
+            let content = heading[2].trim();
+            let align = 'left';
+            const am = content.match(/^\[(left|center|right|justify)\]\s+(.*)$/);
+            if (am) { align = am[1]; content = am[2]; }
+            blocks.push({ type: 'text', content, style: level === 1 ? 'h1' : level === 2 ? 'h2' : 'h3', align, from_markdown: true });
             continue;
         }
         const quote = line.match(/^>\s?(.*)$/);
@@ -248,7 +253,12 @@ function parseMarkdownToBlocks(text) {
             blocks.push({ type: 'divider', style: 'solid', spacing: 'medium', color: 'gray', opacity: 50, from_markdown: true });
             continue;
         }
-        paragraph.push(line.trim());
+        let t = line.trim();
+        if (!paragraph.length) {
+            const am = t.match(/^\[(left|center|right|justify)\]\s+(.*)$/);
+            if (am) { paragraphAlign = am[1]; t = am[2]; }
+        }
+        paragraph.push(t);
     }
     flushParagraph();
     flushList();

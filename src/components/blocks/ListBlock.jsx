@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import AnimatedIcon from '../icons/AnimatedIcon';
 
-const ListBlock = ({ items = [], type: listTypeProp = 'bullet', list_style, title }) => {
+const ListBlock = ({ items = [], type: listTypeProp = 'bullet', list_style, title, from_markdown }) => {
     if (!items || items.length === 0) {
         return null;
     }
@@ -36,12 +36,46 @@ const ListBlock = ({ items = [], type: listTypeProp = 'bullet', list_style, titl
                             {type === 'arrow' && <AnimatedIcon name="ArrowRight" size={18} />}
                         </div>
 
-                        <span className="text-gray-700 leading-relaxed">{item}</span>
+                        <span className="text-gray-700 leading-relaxed">
+                            {from_markdown ? renderInline(item) : item}
+                        </span>
                     </motion.li>
                 ))}
             </ul>
         </div>
     );
+};
+
+const renderInline = (s) => {
+    const nodes = [];
+    let remaining = String(s);
+    const regex = /(\[([^\]]+)\]\(([^)]+)\))|(`([^`]+)`)|(\*\*([^*]+)\*\*)|(__(.+?)__)|(\*(.+?)\*)|(_(.+?)_)|(~~(.+?)~~)/;
+    while (remaining.length) {
+        const m = remaining.match(regex);
+        if (!m) { nodes.push(remaining); break; }
+        const idx = m.index ?? 0;
+        if (idx > 0) nodes.push(remaining.slice(0, idx));
+        const full = m[0];
+        if (m[1]) {
+            const text = m[2];
+            const url = m[3];
+            nodes.push(<a href={url} className="text-primary-600 hover:underline" target="_blank" rel="noopener noreferrer">{text}</a>);
+        } else if (m[4]) {
+            nodes.push(<code className="px-1 py-0.5 bg-gray-100 rounded text-sm font-mono">{m[5]}</code>);
+        } else if (m[6]) {
+            nodes.push(<strong>{m[7]}</strong>);
+        } else if (m[8]) {
+            nodes.push(<strong>{m[9]}</strong>);
+        } else if (m[10]) {
+            nodes.push(<em>{m[11]}</em>);
+        } else if (m[12]) {
+            nodes.push(<em>{m[13]}</em>);
+        } else if (m[14]) {
+            nodes.push(<del>{m[15]}</del>);
+        }
+        remaining = remaining.slice(idx + full.length);
+    }
+    return nodes;
 };
 
 export default ListBlock;
