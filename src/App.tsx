@@ -1,5 +1,6 @@
 import { Routes, Route, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import type { ComponentType, SVGProps } from 'react';
 
 // @ts-expect-error - JS module without types
 import { loadClientConfig } from './utils/configLoader';
@@ -37,6 +38,8 @@ import CountdownBlock from './components/blocks/CountdownBlock';
 import FAQBlock from './components/blocks/FAQBlock';
 // @ts-expect-error - JS module without types
 import TextBlock from './components/blocks/TextBlock';
+import * as LucideIcons from 'lucide-react';
+import { mapIconName } from './utils/iconMapper';
 // @ts-expect-error - JS module without types
 import DividerBlock from './components/blocks/DividerBlock';
 // @ts-expect-error - JS module without types
@@ -110,6 +113,11 @@ type MDXTextProps = {
     align?: 'left' | 'center' | 'right' | 'justify';
     className?: string;
     from_markdown?: boolean;
+    icon?: string;
+    iconPosition?: 'before' | 'after';
+    iconSize?: number;
+    iconColor?: string;
+    color?: string;
 };
 const MDXText = (props: MDXTextProps) => {
     const styles: Record<string, string> = {
@@ -159,14 +167,48 @@ const MDXText = (props: MDXTextProps) => {
         return nodes;
     };
     if (!props.from_markdown) return <TextBlock {...props} />;
+    const getIconSize = () => {
+        if (props.iconSize) return props.iconSize;
+        switch (props.style) {
+            case 'h1': return 32;
+            case 'h2': return 24;
+            case 'h3': return 20;
+            default: return 18;
+        }
+    };
+    const lucideIconName = props.icon ? mapIconName(props.icon) : null;
+    const IconComponent: ComponentType<SVGProps<SVGSVGElement>> | null = lucideIconName ? (LucideIcons as unknown as Record<string, ComponentType<SVGProps<SVGSVGElement>> >)[lucideIconName] : null;
     const cls = `${styles[props.style || 'paragraph']} ${alignment[props.align || 'left']} ${props.className || ''}`.trim();
+    const iconEl = IconComponent ? (
+        <IconComponent
+            size={getIconSize()}
+            color={props.iconColor || props.color || 'currentColor'}
+            className={props.iconPosition === 'after' ? 'ml-2 inline-block' : 'mr-2 inline-block'}
+        />
+    ) : null;
+    const containerClass = (() => {
+        const isFlexLayout = props.align === 'center' || props.align === 'left' || props.align === 'right';
+        if (!IconComponent) return cls;
+        const base = `${cls} ${isFlexLayout ? 'flex items-center' : ''}`;
+        if (props.align === 'center') return `${base} justify-center`;
+        if (props.align === 'right') return `${base} justify-end`;
+        return `${base} justify-start`;
+    })();
     const content = props.content || '';
-    if (props.style === 'h1') return <h1 className={cls}>{renderInline(content)}</h1>;
-    if (props.style === 'h2') return <h2 className={cls}>{renderInline(content)}</h2>;
-    if (props.style === 'h3') return <h3 className={cls}>{renderInline(content)}</h3>;
-    if (props.style === 'quote') return <blockquote className={cls}>{renderInline(content)}</blockquote>;
-    if (props.style === 'caption') return <small className={cls}>{renderInline(content)}</small>;
-    return <p className={cls}>{renderInline(content)}</p>;
+    const children = (
+        <>
+            {props.icon && props.iconPosition !== 'after' && iconEl}
+            {renderInline(content)}
+            {props.icon && props.iconPosition === 'after' && iconEl}
+        </>
+    );
+    const styleColor = props.color ? { color: props.color } : undefined;
+    if (props.style === 'h1') return <h1 className={containerClass} style={styleColor}>{children}</h1>;
+    if (props.style === 'h2') return <h2 className={containerClass} style={styleColor}>{children}</h2>;
+    if (props.style === 'h3') return <h3 className={containerClass} style={styleColor}>{children}</h3>;
+    if (props.style === 'quote') return <blockquote className={containerClass} style={styleColor}>{children}</blockquote>;
+    if (props.style === 'caption') return <small className={containerClass} style={styleColor}>{children}</small>;
+    return <p className={containerClass} style={styleColor}>{children}</p>;
 };
 registerComponent('text', MDXText);
 registerComponent('divider', DividerBlock);

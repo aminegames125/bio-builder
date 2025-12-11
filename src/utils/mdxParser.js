@@ -167,9 +167,11 @@ function parseMarkdownToBlocks(text) {
     let codeLines = [];
     const flushParagraph = () => {
         if (paragraph.length) {
-            blocks.push({ type: 'text', content: paragraph.join(' ').trim(), style: 'paragraph', align: paragraphAlign || 'left', from_markdown: true });
+            const meta = paragraphMeta || {};
+            blocks.push({ type: 'text', content: paragraph.join(' ').trim(), style: 'paragraph', align: paragraphAlign || 'left', from_markdown: true, ...meta });
             paragraph = [];
             paragraphAlign = null;
+            paragraphMeta = null;
         }
     };
     const flushList = () => {
@@ -189,6 +191,44 @@ function parseMarkdownToBlocks(text) {
             codeLang = null;
         }
     };
+    const parseDirectives = (t) => {
+        const directives = {};
+        let rest = t.trim();
+        // consume leading [key=value] or [center]
+        while (rest.startsWith('[')) {
+            const end = rest.indexOf(']');
+            if (end <= 0) break;
+            const token = rest.slice(1, end).trim();
+            const after = rest.slice(end + 1).trimStart();
+            // token could be align keyword or key=value
+            const kv = token.match(/^([a-zA-Z_][\w-]*)(?:\s*=\s*(.*))?$/);
+            if (kv) {
+                const k = kv[1];
+                const v = kv[2];
+                if (k === 'left' || k === 'center' || k === 'right' || k === 'justify') {
+                    directives.align = k;
+                } else if (k === 'class' || k === 'className') {
+                    directives.className = v || '';
+                } else if (k === 'icon') {
+                    directives.icon = v || '';
+                } else if (k === 'iconPosition') {
+                    directives.iconPosition = v || 'before';
+                } else if (k === 'iconColor') {
+                    directives.iconColor = v || '';
+                } else if (k === 'iconSize') {
+                    const n = v && /\d+/.test(v) ? Number(v) : undefined;
+                    if (n !== undefined) directives.iconSize = n;
+                } else if (k === 'color') {
+                    directives.color = v || '';
+                }
+            }
+            rest = after;
+        }
+        return { directives, rest };
+    };
+
+    let paragraphMeta = null;
+
     for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
         if (inCode) {
@@ -219,10 +259,12 @@ function parseMarkdownToBlocks(text) {
             flushList();
             const level = heading[1].length;
             let content = heading[2].trim();
-            let align = 'left';
-            const am = content.match(/^\[(left|center|right|justify)\]\s+(.*)$/);
-            if (am) { align = am[1]; content = am[2]; }
-            blocks.push({ type: 'text', content, style: level === 1 ? 'h1' : level === 2 ? 'h2' : 'h3', align, from_markdown: true });
+            const { directives, rest } = parseDirectives(content);
+            content = rest;
+            const align = directives.align || 'left';
+            const meta = { ...directives };
+            delete meta.align;
+            blocks.push({ type: 'text', content, style: level === 1 ? 'h1' : level === 2 ? 'h2' : 'h3', align, from_markdown: true, ...meta });
             continue;
         }
         const quote = line.match(/^>\s?(.*)$/);
@@ -255,8 +297,12 @@ function parseMarkdownToBlocks(text) {
         }
         let t = line.trim();
         if (!paragraph.length) {
-            const am = t.match(/^\[(left|center|right|justify)\]\s+(.*)$/);
-            if (am) { paragraphAlign = am[1]; t = am[2]; }
+            const { directives, rest } = parseDirectives(t);
+            t = rest;
+            if (directives.align) paragraphAlign = directives.align;
+            const meta = { ...directives };
+            delete meta.align;
+            paragraphMeta = Object.keys(meta).length ? meta : null;
         }
         paragraph.push(t);
     }
